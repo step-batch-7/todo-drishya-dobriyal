@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "title": "user title",
+    "todoItems": [
+      {
+        "item": "item1",
+        "id": 0,
+        "status": false
+      },
+      {
+        "item": "item2",
+        "id": 1,
+        "status": false
+      }
+    ]
+  }
+]
