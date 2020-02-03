@@ -1,3 +1,9 @@
+#heading {
+  font-size: 60px;
+  text-align: center;
+  margin: 0%;
+}
+
 #container {
   display: flex;
   justify-content: space-around;
@@ -5,30 +11,17 @@
   height: 660px;
 }
 
-#todo { 
-  width: 150px;
-  height: auto;
-  border: 1px solid black; 
-  margin: 5px;
-}
-
-#heading {
-  font-size: 60px;
-  text-align: center;
-  margin: 0%;
-}
-
 #content {
   background: rgb(205, 223, 205);
   border: 1px solid black;
-  width: 1000px;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: scroll;
+  width: 60%;
 }
 
-#list {
+#todo {
+  width: 40%;
   background: honeydew;
-  border: 1px solid black;
-  width: 500px;
+  padding: 2%;
+}
+textarea {
+  padding: 1%;
 }

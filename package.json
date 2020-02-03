@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export DATA_STORE=$(pwd)/test/resource/comment.json; nyc mocha",
-    "start": "export DATA_STORE=$(pwd)/dataBase/comments.json; node server.js"
+    "test": "export DATA_STORE=$(pwd)/test/resource/todoList.json; nyc mocha",
+    "start": "export DATA_STORE=$(pwd)/dataStore/todoList.json; node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,6 @@
   "devDependencies": {
     "mocha": "^7.0.1",
     "supertest": "^4.0.2"
-  }
+  },
+  "dependencies": {}
 }

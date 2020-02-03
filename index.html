@@ -5,14 +5,31 @@
   <meta charset="UTF-8">
   <title>TODO</title>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/todoSubmit.js"></script>
 </head>
 
 <body>
   <h1 id="heading">TODO</h1>
+
   <div id="container">
-    <div id="content">
+    <div id="content"></div>
+
+    <div id='todo'>
+      <label for="title">TITLE</label><br>
+      <input type="text" name="title" id="title" required></input><br>
+      <label for="items">TODO TASKS</label><br>
+
+      <div id="tasks">
+        <textarea rows="2" cols="105" type="text" name="todoItem" class="todoItem"></textarea><br>
+      </div>
+
+      <button onclick="addItem()">Add Items</button>
+      <button onclick="addTodo()">DONE</button>
     </div>
-    <div id="list"></div>
+
+  </div>
+
+  </div>
 </body>
 
 </html>
