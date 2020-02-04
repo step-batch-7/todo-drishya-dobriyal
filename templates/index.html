@@ -20,7 +20,10 @@
       <label for="items">TODO TASKS</label><br>
 
       <div id="tasks">
-        <textarea rows="2" cols="105" type="text" name="todoItem" class="todoItem"></textarea><br>
+        <div class="item">
+          <textarea rows="2" cols="105" type="text"></textarea>
+          <div onclick="deleteItem()" class="deleteItem">-</div>
+        </div>
       </div>
 
       <button onclick="addItem()">Add Items</button>

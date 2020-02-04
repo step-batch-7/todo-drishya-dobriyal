@@ -22,6 +22,15 @@
   background: honeydew;
   padding: 2%;
 }
+
 textarea {
   padding: 1%;
+}
+
+.item {
+  display: flex;
+}
+
+.item > div {
+  border: 1px solid;
 }
