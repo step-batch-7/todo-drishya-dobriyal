@@ -15,13 +15,14 @@
     <div id="content"></div>
 
     <div id='todo'>
+      <h1>CREATE YOUR TODO</h1>
       <label for="title">TITLE</label><br>
-      <input type="text" name="title" id="title" required></input><br>
+      <input type="text" name="title" id="title" required></input><br><br>
       <label for="items">TODO TASKS</label><br>
 
       <div id="tasks">
         <div class="item">
-          <textarea rows="2" cols="105" type="text"></textarea>
+          <textarea rows="2" cols="105" type="text" required></textarea>
           <div onclick="deleteItem()" class="deleteItem">-</div>
         </div>
       </div>
