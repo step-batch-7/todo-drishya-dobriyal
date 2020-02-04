@@ -20,8 +20,6 @@ body {
   border: 1px solid black;
   width: 60%;
   overflow: scroll;
-  display: flex;
-  flex-wrap: wrap;
   padding: 1% 3% 1%;
 }
 
@@ -55,4 +53,8 @@ textarea {
 
 .editTodo {
   font-size: 15px;
+}
+
+button {
+  margin: 2%;
 }
