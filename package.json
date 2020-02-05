@@ -22,5 +22,7 @@
     "mocha": "^7.0.1",
     "supertest": "^4.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
 }

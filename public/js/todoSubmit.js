@@ -28,11 +28,11 @@ const saveTodo = () => {
 };
 
 const createTodoTemplate = (id, todo) => {
-  let todoTemplate = `<h2>${id}<h2>`;
+  let todoTemplate = `<div id="details"><h2>${id}<h2>`;
   for (const id in todo) {
     todoTemplate += `<li>${todo[id]}</li>`
   };
-  todoTemplate += `<button onclick="editTodo()" id="${id}">EDIT TODO</button>`
+  todoTemplate += `<button onclick="editTodo()" id="${id}">EDIT TODO</button></div>`
   return todoTemplate;
 };
 
@@ -60,9 +60,9 @@ const displayTodoList = () => {
     if (xhr.status === 200) {
       const content = JSON.parse(xhr.responseText);
       let titleList = Object.keys(content);
-      const heading = '<h3>TODO LIST\'s</h3>'
+      const heading = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>'
       titleList = createTodoListTemplate(titleList);
-      document.getElementById('content').innerHTML = heading + titleList;
+      document.getElementById('todoList').innerHTML = heading + titleList;
     };
   };
   xhr.open('GET', '/todoList.json');
@@ -81,28 +81,36 @@ const saveEditedTodo = () => {
   displayTodoList();
 };
 
+const editTodoTemplate = (items, id) => {
+  let template = '';
+  for (const key in items) {
+    template += `<div> <textarea id="${key}" rows="2" cols="105" type="text">${items[key]}</textarea>`;
+    template += `<div onclick="deleteItem()" id="deleteItem"> - </div></div> `
+  };
+  return `<div id="task">
+        <div id=${id}>
+          <label>TITLE</label><br>
+            <input type="text" name="title" id="${id}"></input >
+            <button onclick="addItem()">Add Item</button>
+            <button onclick="saveEditedTodo()">DONE</button>
+            ${template}
+        </div >
+      </div >`;
+}
+
 const editTodo = () => {
   const id = event.target.id;
-  const data = document.getElementById(id).parentElement;
-  let items = Array.from(data.querySelectorAll('li'));
+  const xhr = new XMLHttpRequest();
 
-  items = items.map(item => {
-    return `<div> <textarea rows="2" cols="105" type="text" required>${item.textContent}</textarea>
-      <div onclick="deleteItem()" id="deleteItem"> - </div></div>`;
-  }).join('');
-  const headingTitle = `<input type="text" name="title" id=${id}></input>`;
+  xhr.onload = () => {
+    const content = JSON.parse(xhr.responseText);
+    const template = editTodoTemplate(content[id], id);
+    document.getElementById('content').innerHTML = template;
+    document.getElementById('content').querySelector('input').value = id;
+  };
 
-  document.getElementById('content').innerHTML =
-    `<div id="task">
-    <div id=${id}>
-    <label>TITLE</label><br>
-    ${headingTitle}
-    <button onclick="addItem()">Add Item</button>
-    <button onclick="saveEditedTodo()">DONE</button>
-    ${items}
-    </div>
-    </div>`;
-  document.getElementById('task').querySelector('input').value = id;
+  xhr.open('GET', '/todoList.json');
+  xhr.send();
 };
 
 document.onload = displayTodoList();
