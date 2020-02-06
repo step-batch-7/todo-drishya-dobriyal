@@ -1,4 +1,14 @@
-const defaultCheckBox = () => `<input type="checkBox"></input>`
+const defaultCheckBox = () => `<input type="checkBox" onclick="toggleStatus"></input>`;
+
+const toggleStatus = () => {
+  const newStatus = event.target.checked;
+  const id = event.target.parentNode.id;
+  const title = document.getElementById('details').querySelector('h2').innerText;
+  const postBody = JSON.stringify({ title, statusCode: newStatus, id });
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/toggleStatus');
+  xhr.send(postBody);
+};
 
 const addNewItem = (id) => {
   const div = document.createElement('div');
@@ -6,7 +16,7 @@ const addNewItem = (id) => {
   div.innerHTML =
     `${defaultCheckBox()}
       <textarea rows="2" cols="105" type="text" required></textarea>
-      <div onclick="saveNewItem()" class="newItem"> - </div>
+      <div onclick="saveNewItem()" class="newItem"> + </div>
       <div onclick="deleteItem()" class="deleteItem"> - </div>`;
   event.target.parentNode.appendChild(div);
 };
@@ -16,10 +26,11 @@ const saveNewItem = () => {
   const title = document.getElementById('details').querySelector('h2').innerText;
   const item = parentNode.querySelector('textarea').value;
   const statusCode = parentNode.querySelector('input').checked;
-  const postBody = `title=${title}&newItem=${item}&statusCode=${statusCode}`;
+  const postBody = JSON.stringify({ title, item, statusCode })
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
+  document.getElementById('content').innerHTML = ''
 };
 
 const deleteItem = () => {
@@ -53,10 +64,10 @@ const createTodoTemplate = (id, todo) => {
         <button onclick="addNewItem()">Add New Item</button>`;
   for (const key in todo) {
     const { id, statusCode, item } = todo[key];
-    if (statusCode === "true") {
-      todoTemplate += `<li id='${id}'><input type="checkBox" checked>${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
+    if (statusCode) {
+      todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()" checked>${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
     }
-    else todoTemplate += `<li id='${id}'><input type="checkBox"> ${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
+    else todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()"> ${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
   };
   return todoTemplate;
 };
