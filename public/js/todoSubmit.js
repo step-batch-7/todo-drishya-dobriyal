@@ -2,9 +2,9 @@ const defaultCheckBox = () => `<input type="checkBox" onclick="toggleStatus"></i
 
 const toggleStatus = () => {
   const newStatus = event.target.checked;
-  const id = event.target.parentNode.id;
-  const title = document.getElementById('details').querySelector('h2').innerText;
-  const postBody = JSON.stringify({ title, statusCode: newStatus, id });
+  const titleId = document.getElementById('details').querySelector('h2').id;
+  const itemId = event.target.parentNode.id;
+  const postBody = JSON.stringify({ newStatus, titleId, itemId });
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/toggleStatus');
   xhr.send(postBody);
@@ -23,10 +23,11 @@ const addNewItem = (id) => {
 
 const saveNewItem = () => {
   const parentNode = event.target.parentNode;
+  const id = document.getElementById('details').querySelector('h2').id;
   const title = document.getElementById('details').querySelector('h2').innerText;
   const item = parentNode.querySelector('textarea').value;
   const statusCode = parentNode.querySelector('input').checked;
-  const postBody = JSON.stringify({ title, item, statusCode })
+  const postBody = JSON.stringify({ title, task: { item, statusCode }, id });
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
@@ -34,10 +35,9 @@ const saveNewItem = () => {
 };
 
 const deleteItem = () => {
-  const content = document.getElementById('details').querySelectorAll('h2')
-  const title = content[0].innerText;
-  const id = event.target.parentNode.id;
-  const postBody = `title=${title}&id=${id}`;
+  const titleId = document.getElementById('details').querySelector('h2').id;
+  const itemId = event.target.parentNode.id;
+  const postBody = JSON.stringify({ titleId, itemId });
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/deleteItem');
   xhr.send(postBody);
@@ -59,16 +59,15 @@ const saveTitle = () => {
   displayTodoList();
 };
 
-const createTodoTemplate = (id, todo) => {
-  let todoTemplate = `<div id="details"><h2>${id}<h2>
-        <button onclick="addNewItem()">Add New Item</button>`;
-  for (const key in todo) {
-    const { id, statusCode, item } = todo[key];
+const createTodoTemplate = (todo) => {
+  let todoTemplate = `<div id="details"><h2 id="${todo.id}">${todo.title}<h2><button onclick="addNewItem()">Add New Item</button>`;
+  todo.tasks.forEach(task => {
+    const { id, statusCode, item } = task;
     if (statusCode) {
       todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()" checked>${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
     }
-    else todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()"> ${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
-  };
+    else todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()"> ${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`;
+  });
   return todoTemplate;
 };
 
@@ -77,16 +76,15 @@ const displayTodo = () => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const content = JSON.parse(xhr.responseText);
-    const todo = content[id];
-    const todoTemplate = createTodoTemplate(id, todo);
+    const userData = content.userName;
+    const todo = userData.find(data => {
+      return data.id === id;
+    });
+    const todoTemplate = createTodoTemplate(todo);
     document.getElementById('content').innerHTML = todoTemplate;
   };
   xhr.open('GET', '/todoList.json');
   xhr.send();
-};
-
-const createTodoListTemplate = (titleList) => {
-  return titleList.map(title => `<li id='${title}' onclick="displayTodo()">${title}</li>`).join('');
 };
 
 const displayTodoList = () => {
@@ -94,10 +92,12 @@ const displayTodoList = () => {
   xhr.onload = () => {
     if (xhr.status === 200) {
       const content = JSON.parse(xhr.responseText);
-      let titleList = Object.keys(content);
-      const heading = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>'
-      titleList = createTodoListTemplate(titleList);
-      document.getElementById('todoList').innerHTML = heading + titleList;
+      const userData = content.userName;
+      let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>'
+      userData.forEach(data => {
+        html += `<li id='${data.id}' onclick="displayTodo()">${data.title}</li>`;
+      });
+      document.getElementById('todoList').innerHTML = html;
     };
   };
   xhr.open('GET', '/todoList.json');
