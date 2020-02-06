@@ -53,7 +53,7 @@ const saveTitle = () => {
   xhr.send(postBody);
 
   document.getElementById('tasks').innerHTML =
-    ` < label > TITLE</label > <br>
+    `<label> TITLE</label> <br>
     <input type="text" name="title" id="title" required></input>
     <button onclick="saveTodo()">DONE</button>`;
   displayTodoList();
