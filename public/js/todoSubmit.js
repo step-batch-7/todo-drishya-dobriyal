@@ -11,21 +11,22 @@ const deleteItem = () => {
   itemToDelete.remove();
 };
 
-const saveTodo = () => {
+const saveTitle = () => {
   const parentNode = event.target.parentNode;
   const title = parentNode.querySelector('input').value;
-  let items = Array.from(parentNode.querySelectorAll('textarea'));
+  // let items = Array.from(parentNode.querySelectorAll('textarea'));
   const xhr = new XMLHttpRequest();
-  items = items.map(item => item.value);
-  const postBody = `title=${title}&todoItems=${items.join('\r\n')}`;
-  xhr.open('POST', '/saveTodo');
+  // items = items.map(item => item.value);
+  // const postBody = `title=${title}&todoItems=${items.join('\r\n')}`;
+  const postBody = `title=${title}`
+  xhr.open('POST', '/saveTitle');
   xhr.send(postBody);
 
   document.getElementById('tasks').innerHTML =
     ` <label>TITLE</label><br>
       <input type="text" name="title" id="title" required></input>
-      <button onclick="addItem()">Add Item</button>
       <button onclick="saveTodo()">DONE</button>`;
+  // <button onclick="addItem()">Add Item</button>
   displayTodoList();
 };
 
