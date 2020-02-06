@@ -1,8 +1,8 @@
-const addItem = () => {
+const addItem = (id) => {
   const div = document.createElement('div');
   div.classList.add('item');
-  div.innerHTML = ` <textarea rows="2" cols="105" type="text" required></textarea>
-      <div onclick="deleteItem()" id="deleteItem"> - </div>`;
+  div.innerHTML = `<textarea rows="2" cols="105" type="text" required></textarea>
+      <div onclick="deleteItem()" class="deleteItem"> - </div>`;
   event.target.parentNode.appendChild(div);
 };
 
@@ -12,8 +12,9 @@ const deleteItem = () => {
 };
 
 const saveTodo = () => {
-  const title = document.getElementById('title').value;
-  let items = Array.from(document.querySelectorAll('textarea'));
+  const parentNode = event.target.parentNode;
+  const title = parentNode.querySelector('input').value;
+  let items = Array.from(parentNode.querySelectorAll('textarea'));
   const xhr = new XMLHttpRequest();
   items = items.map(item => item.value);
   const postBody = `title=${title}&todoItems=${items.join('\r\n')}`;
@@ -25,12 +26,17 @@ const saveTodo = () => {
       <input type="text" name="title" id="title" required></input>
       <button onclick="addItem()">Add Item</button>
       <button onclick="saveTodo()">DONE</button>`;
+  displayTodoList();
 };
 
 const createTodoTemplate = (id, todo) => {
   let todoTemplate = `<div id="details"><h2>${id}<h2>`;
   for (const id in todo) {
-    todoTemplate += `<li>${todo[id]}</li>`
+    const { statusCode, item } = todo[id];
+    if (statusCode) {
+      todoTemplate += `<li><input type="checkBox" checked>${item}</li>`
+    };
+    todoTemplate += `<li><input type="checkBox"> ${item}</li>`
   };
   todoTemplate += `<button onclick="editTodo()" id="${id}">EDIT TODO</button></div>`
   return todoTemplate;
@@ -73,19 +79,34 @@ const saveEditedTodo = () => {
   const parentNode = event.target.parentNode;
   const xhr = new XMLHttpRequest();
   const title = parentNode.querySelector('div input').value;
-  let items = Array.from(parentNode.querySelectorAll('div textarea'));
-  items = items.map(item => item.value);
-  const postBody = `title=${title}&todoItems=${items.join('\r\n')}`;
-  xhr.open('POST', '/saveTodo');
+  let editedItems = Array.from(parentNode.querySelectorAll('div textarea'));
+  let statusCodes = Array.from(parentNode.querySelectorAll('div input'));
+  statusCodes.shift();
+
+  const items = {};
+  editedItems.forEach(todoItem => {
+    items[todoItem.id] = { item: todoItem.value }
+  });
+  statusCodes.forEach(statusCode => {
+    items[statusCode.id][statusCode.id] = statusCode.checked
+  });
+
+  const postBody = `title=${title}&editedItems=${JSON.stringify(items)}`;
+  xhr.open('POST', '/saveEditedTodo');
   xhr.send(postBody);
   displayTodoList();
 };
 
-const editTodoTemplate = (items, id) => {
+const editTodoTemplate = (todo, id) => {
+
   let template = '';
-  for (const key in items) {
-    template += `<div> <textarea id="${key}" rows="2" cols="105" type="text">${items[key]}</textarea>`;
-    template += `<div onclick="deleteItem()" id="deleteItem"> - </div></div> `
+  for (const id in todo) {
+    const { statusCode, item } = todo[id];
+    statusCode ? checkBox = `<input type="checkBox" id="${id}" checked></input>` : checkBox = `<input type="checkBox" id="${id}" ></input>`
+    template += `<div style='display:flex'>
+      ${checkBox}
+      <textarea id="${id}" rows="2" cols="105" type="text">${item}</textarea>`;
+    template += `<div onclick="deleteItem()" class="deleteItem" > - </div></div> `
   };
   return `<div id="task">
         <div id=${id}>
@@ -97,6 +118,8 @@ const editTodoTemplate = (items, id) => {
         </div >
       </div >`;
 }
+
+const defaultCheckBox = (id) => `<input type="checkBox" id="${id}" ></input>`
 
 const editTodo = () => {
   const id = event.target.id;

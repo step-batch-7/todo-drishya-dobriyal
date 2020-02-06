@@ -17,10 +17,10 @@ h4 {
   background-color: rgba(199, 109, 199,0.2);
   box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.4);
   font-size: 20px;
-   display:flex;
-   justify-content:center;
-   margin-bottom:5px;
-    border-radius: 10px;
+  display:flex;
+  justify-content:center;
+  margin-bottom:5px;
+  border-radius: 10px;
 }
 
 #container {
@@ -100,3 +100,6 @@ button {
   margin-bottom:0px;
 }
 
+.deleteItem {
+  background-color: rgba(238, 420, 701, 0.5);
+}
