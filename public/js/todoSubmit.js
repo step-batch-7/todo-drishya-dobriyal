@@ -31,9 +31,7 @@ const saveNewItem = () => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const todoItem = JSON.parse(xhr.responseText);
-    const li = document.createElement('li');
-    li.setAttribute('id', todoItem.id);
-    li.innerHTML = createItemTemplate(todoItem);
+    const li = createNewItemTemplate(todoItem);
     document.getElementById('details').querySelectorAll('h2')[1].appendChild(li)
   };
   xhr.open('POST', '/saveItem');
@@ -66,26 +64,12 @@ const saveTitle = () => {
   displayTodoList();
 };
 
-const createItemTemplate = ({ id, statusCode, item }) => {
-  statusCode ? statusCode = 'checked' : statusCode = '';
-  return `<input type="checkBox" onclick="toggleStatus()" ${statusCode}> 
-         ${item}
-         <div onclick="deleteItem()" class="deleteItem" style='display: flex; justify-content: space-evenly' > - </div>`
-}
-
 const createTodoTemplate = (todo) => {
   let todoTemplate = `<div id="details">
   <h2 id="${todo.id}">${todo.title}<h2>
   <button onclick="addNewItem()">Add New Item</button>`;
-
   todo.tasks.forEach(task => {
-    let { id, statusCode, item } = task;
-    statusCode ? statusCode = 'checked' : statusCode = '';
-    todoTemplate += `<li id='${id}'>
-         <input type="checkBox" onclick="toggleStatus()" ${statusCode}> 
-         ${item}
-         <div onclick="deleteItem()" class="deleteItem" style='display: flex; justify-content: space-evenly' > - </div>
-         </li>`;
+    todoTemplate += createItemTemplate(task);
   });
   return todoTemplate;
 };
