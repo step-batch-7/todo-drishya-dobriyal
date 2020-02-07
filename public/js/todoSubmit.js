@@ -48,14 +48,14 @@ const saveTitle = () => {
   const parentNode = event.target.parentNode;
   const title = parentNode.querySelector('input').value;
   const xhr = new XMLHttpRequest();
-  const postBody = `title=${title}`;
+  const postBody = JSON.stringify({ title });
   xhr.open('POST', '/saveTitle');
   xhr.send(postBody);
 
   document.getElementById('tasks').innerHTML =
     `<label> TITLE</label> <br>
     <input type="text" name="title" id="title" required></input>
-    <button onclick="saveTodo()">DONE</button>`;
+    <button onclick="saveTitle()">DONE</button>`;
   displayTodoList();
 };
 
