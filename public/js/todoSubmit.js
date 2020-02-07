@@ -10,17 +10,6 @@ const toggleStatus = () => {
   xhr.send(postBody);
 };
 
-const addNewItem = (id) => {
-  const div = document.createElement('div');
-  div.classList.add('newItem');
-  div.innerHTML =
-    `${defaultCheckBox()}
-      <textarea rows="2" cols="105" type="text" required></textarea>
-      <div onclick="saveNewItem()" class="newItem"> + </div>
-      <div onclick="deleteItem()" class="deleteItem"> - </div>`;
-  event.target.parentNode.appendChild(div);
-};
-
 const saveNewItem = () => {
   const parentNode = event.target.parentNode;
   const id = document.getElementById('details').querySelector('h2').id;
@@ -38,6 +27,11 @@ const saveNewItem = () => {
   xhr.send(postBody);
   parentNode.parentNode.lastChild.remove();
 };
+
+const addNewItem = () => {
+  const div = newItemTemplate();
+  event.target.parentNode.appendChild(div);
+}
 
 const deleteItem = () => {
   const titleId = document.getElementById('details').querySelector('h2').id;
@@ -57,21 +51,8 @@ const saveTitle = () => {
   xhr.open('POST', '/saveTitle');
   xhr.send(postBody);
 
-  document.getElementById('tasks').innerHTML =
-    `<label> TITLE</label> <br>
-    <input type="text" name="title" id="title" required></input>
-    <button onclick="saveTitle()">DONE</button>`;
+  document.getElementById('tasks').innerHTML = showTitleTemplate();
   displayTodoList();
-};
-
-const createTodoTemplate = (todo) => {
-  let todoTemplate = `<div id="details">
-  <h2 id="${todo.id}">${todo.title}<h2>
-  <button onclick="addNewItem()">Add New Item</button>`;
-  todo.tasks.forEach(task => {
-    todoTemplate += createItemTemplate(task);
-  });
-  return todoTemplate;
 };
 
 const displayTodo = () => {
