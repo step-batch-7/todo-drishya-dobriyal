@@ -32,7 +32,6 @@ const saveNewItem = () => {
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
   parentNode.parentNode.lastChild.remove();
-  
   // document.getElementById('content').innerHTML = ''
 };
 
