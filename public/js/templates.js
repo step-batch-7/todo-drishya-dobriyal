@@ -1,3 +1,5 @@
+const defaultCheckBox = () => `<input type="checkBox" onclick="toggleStatus"></input>`;
+
 const createNewItemTemplate = ({ id, statusCode, item }) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
   const li = document.createElement('li');
@@ -43,4 +45,3 @@ const showTitleTemplate = () => {
     <input type="text" name="title" id="title" required></input>
     <button onclick="saveTitle()">DONE</button>`
 }
-

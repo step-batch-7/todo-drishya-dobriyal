@@ -1,5 +1,3 @@
-const defaultCheckBox = () => `<input type="checkBox" onclick="toggleStatus"></input>`;
-
 const toggleStatus = () => {
   const newStatus = event.target.checked;
   const titleId = document.getElementById('details').querySelector('h2').id;
@@ -48,11 +46,17 @@ const saveTitle = () => {
   const title = parentNode.querySelector('input').value;
   const xhr = new XMLHttpRequest();
   const postBody = JSON.stringify({ title });
+  xhr.onload = () => {
+    const { title, id, tasks } = JSON.parse(xhr.responseText)
+    const li = document.createElement('li');
+    li.setAttribute('id', id);
+    li.setAttribute('onclick', displayTodo);
+    li.innerText = title;
+    document.getElementById('todoList').appendChild(li);
+  };
   xhr.open('POST', '/saveTitle');
   xhr.send(postBody);
-
   document.getElementById('tasks').innerHTML = showTitleTemplate();
-  displayTodoList();
 };
 
 const displayTodo = () => {
