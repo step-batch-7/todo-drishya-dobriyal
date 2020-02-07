@@ -45,9 +45,9 @@ const newItemTemplate = () => {
 };
 
 const displayNewTitle = (id, title) => {
-  const li = document.createElement('li');
-  li.setAttribute('id', id);
-  li.setAttribute('onclick', displayTodo);
-  li.innerText = title;
-  return li;
+  const div = document.createElement('div');
+  div.setAttribute('id', id);
+  div.setAttribute('class', 'titles');
+  div.innerHTML = `<div onclick="displayTodo()">${title}</div><div><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></li></div>`;
+  return div;
 };

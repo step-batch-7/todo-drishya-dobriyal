@@ -78,15 +78,29 @@ const displayTodoList = () => {
     if (xhr.status === 200) {
       const content = JSON.parse(xhr.responseText);
       const userData = content.userName;
-      let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>'
+      let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
       userData.forEach(data => {
-        html += `<li id='${data.id}' onclick="displayTodo()">${data.title}</li>`;
+        html += `<div class = 'titles' id='${data.id}'>
+        <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div><div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></li></div></div>`;
       });
       document.getElementById('todoList').innerHTML = html;
     };
   };
   xhr.open('GET', '/todoList.json');
   xhr.send();
+};
+
+
+const deleteTitle = () => {
+  const xhr = new XMLHttpRequest();
+  const id = event.target.id;
+  postBody = JSON.stringify({ id });
+  xhr.onload = () => {
+    console.log(xhr.responseText);
+  };
+  xhr.open('POST', '/deleteTitle');
+  xhr.send(postBody);
+  document.getElementById(id).remove();
 };
 
 document.onload = displayTodoList();

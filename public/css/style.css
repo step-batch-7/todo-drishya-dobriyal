@@ -41,6 +41,17 @@ h4 {
   border-radius: 10px;
 }
 
+.titles {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid lightgray;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 7px;
+}
+
 #todo {
   width: 30%;
   background: rgba(161, 171, 182,0.05 );
