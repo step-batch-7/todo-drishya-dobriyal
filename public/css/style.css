@@ -79,11 +79,11 @@ button {
 }
 
 #todoList {
-   margin:5px 5px 2px;
-   background: rgba(161, 171, 182,0.05);
-   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
-   border-radius: 10px;
-   width: 20%;
+  margin:5px 5px 2px;
+  background: rgba(161, 171, 182,0.05);
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
+  border-radius: 10px;
+  width: 20%;
 }
 
 #todoList > li {
@@ -98,19 +98,12 @@ button {
   padding-left:10px;
   border-radius:5px;
   margin-bottom:5px;
-  /* border-style:ridge;
-  width: 100%;
-  padding-left:10px;
-  margin: 2%; */
 }
 
-/* 
-#details > h3 {
+.newItem {
+  display: flex;
   border-style:ridge;
-  padding-left:10px;
-  border-radius:5px;
-  margin-bottom:0px;
-} */
+}
 
 .deleteItem {
   background-color: rgba(46, 30, 10, 0.2);
