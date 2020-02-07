@@ -45,3 +45,11 @@ const showTitleTemplate = () => {
     <input type="text" name="title" id="title" required></input>
     <button onclick="saveTitle()">DONE</button>`
 }
+
+const displayNewTitle = (id, title) => {
+  const li = document.createElement('li');
+  li.setAttribute('id', id);
+  li.setAttribute('onclick', displayTodo);
+  li.innerText = title;
+  return li;
+};

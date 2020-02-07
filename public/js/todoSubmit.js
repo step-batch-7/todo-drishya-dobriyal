@@ -48,10 +48,7 @@ const saveTitle = () => {
   const postBody = JSON.stringify({ title });
   xhr.onload = () => {
     const { title, id, tasks } = JSON.parse(xhr.responseText)
-    const li = document.createElement('li');
-    li.setAttribute('id', id);
-    li.setAttribute('onclick', displayTodo);
-    li.innerText = title;
+    const li = displayNewTitle(id, title);
     document.getElementById('todoList').appendChild(li);
   };
   xhr.open('POST', '/saveTitle');
