@@ -1,6 +1,6 @@
 const toggleStatus = () => {
   const newStatus = event.target.checked;
-  const titleId = document.getElementById('details').querySelector('h2').id;
+  const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.parentNode.id;
   const postBody = JSON.stringify({ newStatus, titleId, itemId });
   const xhr = new XMLHttpRequest();
@@ -9,31 +9,31 @@ const toggleStatus = () => {
 };
 
 const saveNewItem = () => {
-  const parentNode = event.target.parentNode;
-  const id = document.getElementById('details').querySelector('h2').id;
-  const title = document.getElementById('details').querySelector('h2').innerText;
-  const item = parentNode.querySelector('textarea').value;
-  const statusCode = parentNode.querySelector('input').checked;
-  const postBody = JSON.stringify({ title, task: { item, statusCode }, id });
+  const id = event.target.parentNode.id;
+  const statusCode = document.getElementById('content').querySelector('.newItem input').checked;
+  const item = document.getElementById('content').querySelector('.newItem textarea').value;
+  const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const todoItem = JSON.parse(xhr.responseText);
     const li = createNewItemTemplate(todoItem);
-    document.getElementById('details').querySelectorAll('h2')[1].appendChild(li)
+    document.querySelector(`#${id} #${id}`).appendChild(li);
   };
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
-  parentNode.parentNode.lastChild.remove();
+  document.querySelector('.newItem').remove();
 };
 
 const addNewItem = () => {
-  const div = newItemTemplate();
-  event.target.parentNode.appendChild(div);
-}
+  const id = event.target.id;
+  const div = newItemTemplate(id);
+  console.log(div, '===========');
+  document.querySelector(`#${id} #${id}`).appendChild(div);
+};
 
 const deleteItem = () => {
-  const titleId = document.getElementById('details').querySelector('h2').id;
-  const itemId = event.target.parentNode.id;
+  const titleId = event.target.parentNode.parentNode.id;
+  const itemId = event.target.id;
   const postBody = JSON.stringify({ titleId, itemId });
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/deleteItem');
@@ -81,7 +81,9 @@ const displayTodoList = () => {
       let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
       userData.forEach(data => {
         html += `<div class = 'titles' id='${data.id}'>
-        <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div><div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></li></div></div>`;
+           <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
+           <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
+        </div>`;
       });
       document.getElementById('todoList').innerHTML = html;
     };
@@ -90,14 +92,13 @@ const displayTodoList = () => {
   xhr.send();
 };
 
-
 const deleteTitle = () => {
   const xhr = new XMLHttpRequest();
   const id = event.target.id;
   postBody = JSON.stringify({ id });
-  xhr.onload = () => {
-    console.log(xhr.responseText);
-  };
+  // xhr.onload = () => {
+  //   console.log(xhr.responseText);
+  // };
   xhr.open('POST', '/deleteTitle');
   xhr.send(postBody);
   document.getElementById(id).remove();
