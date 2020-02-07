@@ -31,7 +31,7 @@ h4 {
 
 #content {
   margin:5px 10px 2px;
-  background-color: rgba(109, 199, 154, 0.2);
+  background-color: rgba(161, 171, 182,0.05);
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
   width: 40%;
   overflow: scroll;
@@ -41,7 +41,7 @@ h4 {
 
 #todo {
   width: 30%;
-  background: rgba(161, 171, 182,0.4  );
+  background: rgba(161, 171, 182,0.05 );
   padding:0% 2% 0%;
   border-radius: 10px;
   margin:5px 5px 2px;
@@ -63,8 +63,8 @@ textarea {
 .template {
   margin: 2%;
   padding: 1.5%;
-  border: 1px solid rgba(90, 75, 75, 0.2);
-  background: rgba(161, 171, 182,0.5);
+  border: 1px solid rgba(90, 75, 75, 0.05);
+  background: rgba(161, 171, 182,0.3);
   width: 200px;
   height: 200px;
   overflow: scroll;
@@ -80,7 +80,7 @@ button {
 
 #todoList {
    margin:5px 5px 2px;
-   background: rgba(161, 171, 182,0.5);
+   background: rgba(161, 171, 182,0.05);
    box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
    border-radius: 10px;
    width: 20%;
@@ -93,13 +93,25 @@ button {
   border-radius: 5px;
 }
 
-#details > h2 {
+#details > h2 > li {
+  border-style:ridge;
+  padding-left:10px;
+  border-radius:5px;
+  margin-bottom:5px;
+  /* border-style:ridge;
+  width: 100%;
+  padding-left:10px;
+  margin: 2%; */
+}
+
+/* 
+#details > h3 {
   border-style:ridge;
   padding-left:10px;
   border-radius:5px;
   margin-bottom:0px;
-}
+} */
 
 .deleteItem {
-  background-color: rgba(238, 420, 701, 0.5);
+  background-color: rgba(46, 30, 10, 0.2);
 }

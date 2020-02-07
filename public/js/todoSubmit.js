@@ -60,13 +60,24 @@ const saveTitle = () => {
 };
 
 const createTodoTemplate = (todo) => {
-  let todoTemplate = `<div id="details"><h2 id="${todo.id}">${todo.title}<h2><button onclick="addNewItem()">Add New Item</button>`;
+  let todoTemplate = `<div id="details">
+  <h2 id="${todo.id}">${todo.title}<h2>
+  <button onclick="addNewItem()">Add New Item</button>`;
+
   todo.tasks.forEach(task => {
     const { id, statusCode, item } = task;
     if (statusCode) {
-      todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()" checked>${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`
+      todoTemplate += `<li id='${id}'>
+                        <input type="checkBox" onclick="toggleStatus()" checked>
+                        ${item}
+                        <div onclick="deleteItem()" class="deleteItem" style='display: flex; justify-content: space-evenly' > - </div>
+                      </li>`
     }
-    else todoTemplate += `<li id='${id}'><input type="checkBox" onclick="toggleStatus()"> ${item}<div onclick="deleteItem()" class="deleteItem" > - </div></li>`;
+    else todoTemplate += `<li id='${id}'>
+                            <input type="checkBox" onclick="toggleStatus()"> 
+                            ${item}
+                            <div onclick="deleteItem()" class="deleteItem" style='display: flex; justify-content: space-evenly' > - </div>
+                          </li>`;
   });
   return todoTemplate;
 };
