@@ -3,8 +3,6 @@ const request = require('supertest');
 const { DATA_STORE } = require('../config');
 const { app } = require('../lib/assignHandlers');
 
-const dataStore = fs.readFileSync(DATA_STORE, 'utf8');
-
 describe('GET method', function () {
   it('for home page for / url', function (done) {
     request(app.serve.bind(app))
@@ -34,9 +32,19 @@ describe('GET method', function () {
       .expect('Content-Type', /application\/json/)
       .expect(200, done);
   });
+  it('for /badFile', function (done) {
+    request(app.serve.bind(app))
+      .get('/badFile.html')
+      .set('Accept', '*/*')
+      .expect(404, done);
+  });
 });
 
 describe("POST saveData", function () {
+  let dataStore;
+  before(() => {
+    dataStore = fs.readFileSync(DATA_STORE, 'utf8');
+  })
   after(() => {
     fs.writeFileSync(DATA_STORE, dataStore);
   })
