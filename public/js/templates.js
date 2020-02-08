@@ -9,9 +9,8 @@ const createTodoTemplate = (todo) => {
   let todoTemplate =
     `<div id='box'>
      <div id='${id}' class='details'>
-     <div class='titleHeading'><h2>${title} </h2>
+     <div class='titleHeading'><input value='${title}' type='text' onchange="changeTitle('${id}')"></input>
      <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span></div>`
-
   todo.tasks.forEach(task => {
     todoTemplate += `<li id='id'>${createItemTemplate(task)}</li>`
   });

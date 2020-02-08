@@ -93,4 +93,12 @@ const deleteTitle = () => {
   document.querySelector(`#todoList #${id}`).remove();
 };
 
+const changeTitle = id => {
+  const xhr = new XMLHttpRequest();
+  const newTitle = event.target.value;
+  const postBody = JSON.stringify({ id, newTitle });
+  xhr.open('POST', '/changeTitle');
+  xhr.send(postBody);
+}
+
 document.onload = displayTodoList();
