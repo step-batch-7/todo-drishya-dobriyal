@@ -53,9 +53,7 @@ const displayNewTitle = (id, title) => {
   const div = document.createElement('div');
   div.setAttribute('id', id);
   div.setAttribute('class', 'titles');
-  div.innerHTML = `<div onclick="displayTodo()" id='${id}'>${title}</div>
-      <div><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i>
-      </div>`;
+  div.innerHTML = `<div onclick="displayTodo()" id='${id}'>${title}</div>`;
   return div;
 };
 
