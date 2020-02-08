@@ -27,7 +27,7 @@ const showTitleTemplate = () => {
 
 const createNewItemTemplate = (data) => {
   const li = document.createElement('li');
-  li.setAttribute('id', id);
+  li.setAttribute('id', data.id);
   li.innerHTML = createItemTemplate(data);
   return li;
 };

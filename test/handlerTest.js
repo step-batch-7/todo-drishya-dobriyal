@@ -26,3 +26,7 @@ describe('GET method', function () {
       .expect(200, done);
   });
 });
+
+describe("POST method",function(){
+  
+});
