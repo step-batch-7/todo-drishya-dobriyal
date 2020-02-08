@@ -27,7 +27,6 @@ const saveNewItem = () => {
 const addNewItem = () => {
   const id = event.target.id;
   const div = newItemTemplate(id);
-  console.log(div, '===========');
   document.querySelector(`#${id} #${id}`).appendChild(div);
 };
 
