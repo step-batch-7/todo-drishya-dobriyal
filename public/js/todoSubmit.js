@@ -101,4 +101,12 @@ const changeTitle = id => {
   xhr.send(postBody);
 }
 
+const changeItem = (itemId, titleId) => {
+  const xhr = new XMLHttpRequest();
+  const newItem = event.target.value;
+  const postBody = JSON.stringify({ titleId, itemId, newItem, });
+  xhr.open('POST', '/changeItem');
+  xhr.send(postBody);
+}
+
 document.onload = displayTodoList();

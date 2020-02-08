@@ -96,6 +96,14 @@ describe("POST saveData", function () {
       .expect(200, done)
       .expect('Content-Type', 'application/json')
   });
+  it('should change title on /changeItem req ', function (done) {
+    request(app.serve.bind(app))
+      .post('/changeItem')
+      .set('Accept', '*/*')
+      .send('{ "newItem": "subject", "titleId":"T_2", "itemId":"I_3" }')
+      .expect(200, done)
+      .expect('Content-Type', 'application/json')
+  });
 });
 
 describe("method not Handled", function () {
