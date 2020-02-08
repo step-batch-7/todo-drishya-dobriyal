@@ -16,7 +16,7 @@
     <h1>TODO</h1>
   </div>
   <div id="container" style="display: flex;">
-    <div id='todo'>
+    <div id='todoSearch'>
       <h4>CREATE TODO TITLE</h4>
 
       <div>
@@ -26,7 +26,12 @@
           <button onclick="saveTitle()">DONE</button>
         </div>
       </div>
+      <h4>Search Engine</h4>
+      <div id="search"><input type="text" placeholder="search title" onkeyup="displayMatch('title')"></input><input
+          type="text" placeholder="search task" onkeyup="displayMatch('task')"></input>
+      </div>
     </div>
+
     <div id="content"></div>
     <div id="todoList"></div>
 

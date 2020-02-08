@@ -109,4 +109,19 @@ const changeItem = (itemId, titleId) => {
   xhr.send(postBody);
 }
 
+const displayMatch = (search) => {
+  const xhr = new XMLHttpRequest();
+  const content = event.target.value;
+  xhr.onload = () => {
+    const content = JSON.parse(xhr.responseText);
+    let allTodo = '';
+    content.forEach(todo => {
+      allTodo += createTodoTemplate(todo);
+    });
+    document.getElementById('content').innerHTML = allTodo;
+  };
+  xhr.open('POST', '/findGivenTitle');
+  xhr.send(JSON.stringify({ content, search }));
+}
+
 document.onload = displayTodoList();
