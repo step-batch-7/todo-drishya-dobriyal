@@ -74,12 +74,10 @@ const displayTodo = () => {
 const displayTodoList = () => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
-    if (xhr.status === 200) {
-      const content = JSON.parse(xhr.responseText);
-      const userData = content;
-      const html = todoListTemplate(userData);
-      document.getElementById('todoList').innerHTML = html;
-    };
+    const content = JSON.parse(xhr.responseText);
+    const userData = content;
+    const html = todoListTemplate(userData);
+    document.getElementById('todoList').innerHTML = html;
   };
   xhr.open('GET', '/todoList.json');
   xhr.send();
