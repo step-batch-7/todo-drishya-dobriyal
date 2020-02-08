@@ -1,34 +1,31 @@
 const createItemTemplate = ({ id, statusCode, item }) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
-  return `
-           <li id='${id}'>
-           <input type="checkBox" onclick="toggleStatus()" ${statusCode}>
-           ${item}
-           <div onclick="deleteItem()" class="deleteItem"  id='${id}' style='display: flex; justify-content: space-evenly'> - </div>
-           </li>
-          `;
+  return `<li id='${id}'>
+          <input type="checkBox" onclick="toggleStatus()" ${statusCode}>
+          ${item}
+          <div onclick="deleteItem()" class="deleteItem"  id='${id}' style='display: flex; justify-content: space-evenly'> - </div>
+        </li>`;
 };
+
 const createTodoTemplate = (todo) => {
   const { title, id, tasks } = todo;
   let todoTemplate =
     `<div id='box'>
-    <div id='${id}' class='details'>
-    <h2>${title}
-    <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span> </h2>
-    `
+     <div id='${id}' class='details'>
+     <div class='titleHeading'><h2>${title} </h2>
+     <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span></div>`
   todo.tasks.forEach(task => {
     todoTemplate += createItemTemplate(task);
   });
   todoTemplate += `</div><button onclick = "addNewItem()" id = '${id}' > Add New Item</button></div></div>`
-  console.log(todoTemplate)
   return todoTemplate;
 };
 
 const showTitleTemplate = () => {
   return `<label> TITLE</label> <br>
-    <input type="text" name="title" id="title" required></input>
-    <button onclick="saveTitle()">DONE</button>`
-}
+          <input type="text" name="title" id="title" required></input>
+          <button onclick="saveTitle()">DONE</button>`
+};
 
 const createNewItemTemplate = ({ id, statusCode, item }) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
@@ -64,11 +61,12 @@ const displayNewTitle = (id, title) => {
 
 const todoListTemplate = (userData) => {
   let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
+
   userData.forEach(data => {
     html += `<div class = 'titles' id='${data.id}'>
-           <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
-           <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
-        </div>`;
+             <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
+             <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
+          </div>`;
   });
   return html;
 };
