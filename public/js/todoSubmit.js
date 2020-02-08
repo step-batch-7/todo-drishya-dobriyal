@@ -96,9 +96,6 @@ const deleteTitle = () => {
   const xhr = new XMLHttpRequest();
   const id = event.target.id;
   postBody = JSON.stringify({ id });
-  // xhr.onload = () => {
-  //   console.log(xhr.responseText);
-  // };
   xhr.open('POST', '/deleteTitle');
   xhr.send(postBody);
   document.getElementById(id).remove();

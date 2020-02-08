@@ -8,17 +8,6 @@ const createItemTemplate = ({ id, statusCode, item }) => {
            </li>
           `;
 };
-
-// const createTodoTemplate = (todo) => {
-//   let todoTemplate = `<div id="details">
-//   <div><h2 id="${todo.id}">${todo.title}</h2><div><i class="fa fa-trash-o" aria-hidden="true" id='${todo.id}' onclick='deleteTitle()'></div><div>
-//   <button onclick="addNewItem()">Add New Item</button>`;
-//   todo.tasks.forEach(task => {
-//     todoTemplate += createItemTemplate(task);
-//   });
-//   return todoTemplate;
-// };
-
 const createTodoTemplate = (todo) => {
   const { title, id, tasks } = todo;
   let todoTemplate =
