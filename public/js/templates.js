@@ -11,21 +11,23 @@ const createItemTemplate = ({ id, statusCode, item }) => {
 const createTodoTemplate = (todo) => {
   const { title, id, tasks } = todo;
   let todoTemplate =
-    `<div id='${id}'>
-    <div><h2 >${title}</h2></div>
-    <div id='${id}'>`;
+    `<div id='box'>
+    <div id='${id}' class='details'>
+    <h2>${title}
+    <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span> </h2>
+    `
   todo.tasks.forEach(task => {
     todoTemplate += createItemTemplate(task);
   });
-  todoTemplate += `</div id='${id}'><button onclick="addNewItem()" id='${id}'>Add New Item</button>
-     <div id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></div></div>`
+  todoTemplate += `</div><button onclick = "addNewItem()" id = '${id}' > Add New Item</button></div></div>`
+  console.log(todoTemplate)
   return todoTemplate;
-}
+};
 
 const showTitleTemplate = () => {
   return `<label> TITLE</label> <br>
-         <input type="text" name="title" id="title" required></input>
-        <button onclick="saveTitle()">DONE</button>`
+    <input type="text" name="title" id="title" required></input>
+    <button onclick="saveTitle()">DONE</button>`
 }
 
 const createNewItemTemplate = ({ id, statusCode, item }) => {
@@ -33,8 +35,8 @@ const createNewItemTemplate = ({ id, statusCode, item }) => {
   const li = document.createElement('li');
   li.setAttribute('id', id);
   li.innerHTML = `<input type="checkBox" onclick="toggleStatus()" ${statusCode}>
-               ${item}
-               <div onclick="deleteItem()" class="deleteItem" id='${id}' style='display: flex; justify-content: space-evenly'> - </div>`;
+      ${item}
+      <div onclick="deleteItem()" class="deleteItem" id='${id}' style='display: flex; justify-content: space-evenly'> - </div>`;
   return li;
 };
 
@@ -44,9 +46,9 @@ const newItemTemplate = (id) => {
   div.setAttribute('id', id);
   div.innerHTML =
     `<input type="checkBox" onclick="toggleStatus"></input>
-      <textarea rows="2" cols="105" type="text" required></textarea>
-      <div onclick="saveNewItem()" class="newItem"  id='${id}'> + </div>
-      <div onclick="deleteItem()" class="deleteItem"  id='${id}'> - </div>`;
+      <input id='textarea' type="text" required></input>
+      <div onclick="saveNewItem()" class="newItem" id='${id}'> + </div>
+      <div onclick="deleteItem()" class="deleteItem" id='${id}'> - </div>`;
   return div;
 };
 
@@ -56,7 +58,7 @@ const displayNewTitle = (id, title) => {
   div.setAttribute('class', 'titles');
   div.innerHTML = `<div onclick="displayTodo()" id='${id}'>${title}</div>
       <div><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i>
-    </div>`;
+      </div>`;
   return div;
 };
 

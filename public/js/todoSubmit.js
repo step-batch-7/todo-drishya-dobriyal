@@ -11,13 +11,13 @@ const toggleStatus = () => {
 const saveNewItem = () => {
   const id = event.target.parentNode.id;
   const statusCode = document.getElementById('content').querySelector('.newItem input').checked;
-  const item = document.getElementById('content').querySelector('.newItem textarea').value;
+  const item = document.getElementById('content').querySelector('.newItem #textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const todoItem = JSON.parse(xhr.responseText);
     const li = createNewItemTemplate(todoItem);
-    document.querySelector(`#${id} #${id}`).appendChild(li);
+    document.querySelector(`#${id}`).appendChild(li);
   };
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
@@ -27,7 +27,7 @@ const saveNewItem = () => {
 const addNewItem = () => {
   const id = event.target.id;
   const div = newItemTemplate(id);
-  document.querySelector(`#${id} #${id}`).appendChild(div);
+  document.querySelector(`#${id}`).appendChild(div);
 };
 
 const deleteItem = () => {
@@ -60,7 +60,7 @@ const displayTodo = () => {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const content = JSON.parse(xhr.responseText);
-    const userData = content.userName;
+    const userData = content;
     const todo = userData.find(data => {
       return data.id === id;
     });
@@ -76,7 +76,7 @@ const displayTodoList = () => {
   xhr.onload = () => {
     if (xhr.status === 200) {
       const content = JSON.parse(xhr.responseText);
-      const userData = content.userName;
+      const userData = content;
       const html = todoListTemplate(userData);
       document.getElementById('todoList').innerHTML = html;
     };
@@ -91,7 +91,7 @@ const deleteTitle = () => {
   postBody = JSON.stringify({ id });
   xhr.open('POST', '/deleteTitle');
   xhr.send(postBody);
-  document.querySelector(`#content #${id}`).remove();
+  document.querySelector(`#box`).remove();
   document.querySelector(`#todoList #${id}`).remove();
 };
 
