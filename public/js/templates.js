@@ -59,3 +59,14 @@ const displayNewTitle = (id, title) => {
     </div>`;
   return div;
 };
+
+const todoListTemplate = (userData) => {
+  let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
+  userData.forEach(data => {
+    html += `<div class = 'titles' id='${data.id}'>
+           <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
+           <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
+        </div>`;
+  });
+  return html;
+};

@@ -78,13 +78,7 @@ const displayTodoList = () => {
     if (xhr.status === 200) {
       const content = JSON.parse(xhr.responseText);
       const userData = content.userName;
-      let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
-      userData.forEach(data => {
-        html += `<div class = 'titles' id='${data.id}'>
-           <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
-           <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
-        </div>`;
-      });
+      const html = todoListTemplate(userData);
       document.getElementById('todoList').innerHTML = html;
     };
   };
@@ -98,7 +92,8 @@ const deleteTitle = () => {
   postBody = JSON.stringify({ id });
   xhr.open('POST', '/deleteTitle');
   xhr.send(postBody);
-  document.getElementById(id).remove();
+  document.querySelector(`#content #${id}`).remove();
+  document.querySelector(`#todoList #${id}`).remove();
 };
 
 document.onload = displayTodoList();
