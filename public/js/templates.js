@@ -1,10 +1,7 @@
 const createItemTemplate = ({ id, statusCode, item }) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
-  return `<li id='${id}'>
-          <input type="checkBox" onclick="toggleStatus()" ${statusCode}>
-          ${item}
-          <div onclick="deleteItem()" class="deleteItem"  id='${id}' style='display: flex; justify-content: space-evenly'> - </div>
-        </li>`;
+  return `<input type="checkBox" onclick="toggleStatus()" ${statusCode}>${item}</input>
+          <div onclick="deleteItem()" class="deleteItem"  id='${id}'> - </div>`;
 };
 
 const createTodoTemplate = (todo) => {
@@ -14,8 +11,9 @@ const createTodoTemplate = (todo) => {
      <div id='${id}' class='details'>
      <div class='titleHeading'><h2>${title} </h2>
      <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span></div>`
+
   todo.tasks.forEach(task => {
-    todoTemplate += createItemTemplate(task);
+    todoTemplate += `<li id='id'>${createItemTemplate(task)}</li>`
   });
   todoTemplate += `</div><button onclick = "addNewItem()" id = '${id}' > Add New Item</button></div></div>`
   return todoTemplate;
@@ -27,13 +25,10 @@ const showTitleTemplate = () => {
           <button onclick="saveTitle()">DONE</button>`
 };
 
-const createNewItemTemplate = ({ id, statusCode, item }) => {
-  statusCode ? statusCode = 'checked' : statusCode = '';
+const createNewItemTemplate = (data) => {
   const li = document.createElement('li');
   li.setAttribute('id', id);
-  li.innerHTML = `<input type="checkBox" onclick="toggleStatus()" ${statusCode}>
-      ${item}
-      <div onclick="deleteItem()" class="deleteItem" id='${id}' style='display: flex; justify-content: space-evenly'> - </div>`;
+  li.innerHTML = createItemTemplate(data);
   return li;
 };
 
@@ -44,7 +39,7 @@ const newItemTemplate = (id) => {
   div.innerHTML =
     `<input type="checkBox" onclick="toggleStatus"></input>
       <input id='textarea' type="text" required></input>
-      <div onclick="saveNewItem()" class="newItem" id='${id}'> + </div>
+      <div onclick="saveNewItem()"  class="newItem" id='${id}'> + </div>
       <div onclick="deleteItem()" class="deleteItem" id='${id}'> - </div>`;
   return div;
 };
@@ -63,7 +58,6 @@ const todoListTemplate = (userData) => {
   userData.forEach(data => {
     html += `<div class = 'titles' id='${data.id}'>
              <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
-             <div><i class="fa fa-trash-o" aria-hidden="true" id='${data.id}' onclick='deleteTitle()'></i></div>
           </div>`;
   });
   return html;

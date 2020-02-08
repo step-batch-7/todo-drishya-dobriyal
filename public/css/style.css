@@ -141,6 +141,8 @@ button {
 }
 
 .deleteItem {
+  display: flex;
+  justify-content: space-evenly;
   background-color: rgba(46, 30, 10, 0.2);
 }
 #textarea {
