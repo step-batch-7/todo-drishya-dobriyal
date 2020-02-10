@@ -13,15 +13,13 @@ const saveNewItem = () => {
   const statusCode = document.querySelector('.newItem input').checked;
   const item = document.querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
-  const xhr = new XMLHttpRequest();
-  xhr.onload = () => {
-    const todoItem = JSON.parse(xhr.responseText);
+  const callback = item => {
+    const todoItem = JSON.parse(item);
     const li = createNewItemTemplate(todoItem);
     document.querySelector(`.details`).appendChild(li);
+    document.querySelector('.newItem').remove();
   };
-  xhr.open('POST', '/saveItem');
-  xhr.send(postBody);
-  document.querySelector('.newItem').remove();
+  sendNewRequest('POST', '/saveItem', postBody, callback);
 };
 
 const addNewItem = () => {
@@ -43,16 +41,14 @@ const deleteItem = () => {
 const saveTitle = () => {
   const parentNode = event.target.parentNode;
   const title = parentNode.querySelector('input').value;
-  const xhr = new XMLHttpRequest();
   const postBody = JSON.stringify({ title });
-  xhr.onload = () => {
-    const { title, id, tasks } = JSON.parse(xhr.responseText);
+  const callback = todo => {
+    const { title, id, tasks } = JSON.parse(todo);
     const li = displayNewTitle(id, title);
     document.getElementById('todoList').appendChild(li);
+    document.getElementById('tasks').innerHTML = showTitleTemplate();
   };
-  xhr.open('POST', '/saveTitle');
-  xhr.send(postBody);
-  document.getElementById('tasks').innerHTML = showTitleTemplate();
+  sendNewRequest('POST', '/saveTitle', postBody, callback);
 };
 
 const displayTodo = () => {
