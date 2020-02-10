@@ -1,8 +1,8 @@
 const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
-  return `<input type="checkBox"  onclick="toggleStatus()" ${statusCode}></input>
+  return `<input type="checkBox"  onclick="toggleStatus()" ${statusCode} title="toggle status"></input>
             <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
-          <div onclick="deleteItem()" class="deleteItem"  id='${id}'> - </div>`;
+          <div onclick="deleteItem()" class="deleteItem"  id='${id}' title="delete item"> - </div>`;
 };
 
 const createTodoTemplate = (todo) => {
@@ -11,12 +11,12 @@ const createTodoTemplate = (todo) => {
     `<div class='box'>
      <div class='titleHeading'>
      <input value='${title}' type='text' onchange="changeTitle('${id}')"></input>
-     <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span>
+     <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()' title="delete Title"></i></span>
      </div>
      <div id='${id}' class='details'>`
   todo.tasks.forEach(task => {
     todoTemplate += `<li id='${id}'>${createItemTemplate(task, id)}</li>`
-  }); 
+  });
   todoTemplate += `</div><div  class="addNewItem"><button onclick = "addNewItem()" id='${id}'> Add New Item</button></div></div>`
   return todoTemplate;
 };
@@ -41,8 +41,8 @@ const newItemTemplate = (id) => {
   div.innerHTML =
     `<input type="checkBox" onclick="toggleStatus"></input>
       <input class='textarea' type="text" required></input>
-      <div onclick="saveNewItem()"  id='${id}'> + </div>
-      <div onclick="deleteItem()"  id='${id}'> - </div>`;
+      <div onclick="saveNewItem()"  id='${id}' title="save task"> + </div>
+      <div onclick="deleteItem()"  id='${id}' title="delete task"> - </div>`;
   return div;
 };
 
