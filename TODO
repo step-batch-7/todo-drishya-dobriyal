@@ -10,3 +10,7 @@ done ==> add feature :
  serveChangeTitle,
  serveChangeItem,
 serveMatch
+
+
+can avoid the access of dataStore to todoList
+can avoid getTodoMap for just copying the text

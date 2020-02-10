@@ -10,8 +10,8 @@ const toggleStatus = () => {
 
 const saveNewItem = () => {
   const id = event.target.parentNode.id;
-  const statusCode = document.getElementById('content').querySelector('.newItem input').checked;
-  const item = document.getElementById('content').querySelector('.newItem .textarea').value;
+  const statusCode = document.querySelector('.newItem input').checked;
+  const item = document.querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
@@ -46,7 +46,7 @@ const saveTitle = () => {
   const xhr = new XMLHttpRequest();
   const postBody = JSON.stringify({ title });
   xhr.onload = () => {
-    const { title, id, tasks } = JSON.parse(xhr.responseText)
+    const { title, id, tasks } = JSON.parse(xhr.responseText);
     const li = displayNewTitle(id, title);
     document.getElementById('todoList').appendChild(li);
   };
@@ -100,17 +100,17 @@ const changeTitle = id => {
   const postBody = JSON.stringify({ id, newTitle });
   xhr.open('POST', '/changeTitle');
   xhr.send(postBody);
-}
+};
 
 const changeItem = (itemId, titleId) => {
   const xhr = new XMLHttpRequest();
   const newItem = event.target.value;
-  const postBody = JSON.stringify({ titleId, itemId, newItem, });
+  const postBody = JSON.stringify({ titleId, itemId, newItem });
   xhr.open('POST', '/changeItem');
   xhr.send(postBody);
-}
+};
 
-const displayMatch = (search) => {
+const displayMatch = search => {
   const xhr = new XMLHttpRequest();
   const content = event.target.value;
   xhr.onload = () => {
@@ -123,6 +123,6 @@ const displayMatch = (search) => {
   };
   xhr.open('POST', '/findGivenContent');
   xhr.send(JSON.stringify({ content, search }));
-}
+};
 
 document.onload = displayTodoList();
