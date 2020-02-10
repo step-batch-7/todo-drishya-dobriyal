@@ -11,13 +11,13 @@ const toggleStatus = () => {
 const saveNewItem = () => {
   const id = event.target.parentNode.id;
   const statusCode = document.getElementById('content').querySelector('.newItem input').checked;
-  const item = document.getElementById('content').querySelector('.newItem #textarea').value;
+  const item = document.getElementById('content').querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     const todoItem = JSON.parse(xhr.responseText);
     const li = createNewItemTemplate(todoItem);
-    document.querySelector(`#${id}`).appendChild(li);
+    document.querySelector(`.details`).appendChild(li);
   };
   xhr.open('POST', '/saveItem');
   xhr.send(postBody);
@@ -27,7 +27,7 @@ const saveNewItem = () => {
 const addNewItem = () => {
   const id = event.target.id;
   const div = newItemTemplate(id);
-  document.querySelector(`#${id}`).appendChild(div);
+  document.querySelector(`.details#${id}`).appendChild(div);
 };
 
 const deleteItem = () => {
@@ -89,13 +89,14 @@ const deleteTitle = () => {
   postBody = JSON.stringify({ id });
   xhr.open('POST', '/deleteTitle');
   xhr.send(postBody);
-  document.querySelector(`#box`).remove();
+  document.querySelector(`.box`).remove();
   document.querySelector(`#todoList #${id}`).remove();
 };
 
 const changeTitle = id => {
   const xhr = new XMLHttpRequest();
   const newTitle = event.target.value;
+  document.querySelector(`.titles#${id}`).innerText = newTitle;
   const postBody = JSON.stringify({ id, newTitle });
   xhr.open('POST', '/changeTitle');
   xhr.send(postBody);

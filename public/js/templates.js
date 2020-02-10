@@ -8,20 +8,22 @@ const createItemTemplate = ({ id, statusCode, item }, titleId) => {
 const createTodoTemplate = (todo) => {
   const { title, id, tasks } = todo;
   let todoTemplate =
-    `<div id='box'>
-     <div id='${id}' class='details'>
-     <div class='titleHeading'><input value='${title}' type='text' onchange="changeTitle('${id}')"></input>
-     <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span></div>`
+    `<div class='box'>
+     <div class='titleHeading'>
+     <input value='${title}' type='text' onchange="changeTitle('${id}')"></input>
+     <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()'></i></span>
+     </div>
+     <div id='${id}' class='details'>`
   todo.tasks.forEach(task => {
     todoTemplate += `<li id='${id}'>${createItemTemplate(task, id)}</li>`
-  });
-  todoTemplate += `</div><button onclick = "addNewItem()" id = '${id}' > Add New Item</button></div></div>`
+  }); 
+  todoTemplate += `</div><div  class="addNewItem"><button onclick = "addNewItem()" id='${id}'> Add New Item</button></div></div>`
   return todoTemplate;
 };
 
 const showTitleTemplate = () => {
   return `<label> TITLE</label> <br>
-          <input type="text" name="title" id="title" required></input>
+          <input type="text" name="title" class="title" required></input>
           <button onclick="saveTitle()">DONE</button>`
 };
 
@@ -38,7 +40,7 @@ const newItemTemplate = (id) => {
   div.setAttribute('id', id);
   div.innerHTML =
     `<input type="checkBox" onclick="toggleStatus"></input>
-      <input id='textarea' type="text" required></input>
+      <input class='textarea' type="text" required></input>
       <div onclick="saveNewItem()"  id='${id}'> + </div>
       <div onclick="deleteItem()"  id='${id}'> - </div>`;
   return div;

@@ -15,7 +15,7 @@
 #container {
   display: flex;
   justify-content: space-around;
-  height: 660px;
+  height: 635px;
   width: 100%;
 }
 
@@ -30,7 +30,7 @@ h4 {
 }
 
 #todoSearch {
-  width: 30%;
+  width: 35%;
   background: rgba(161, 171, 182,0.05 );
   padding:0% 2% 0%;
   border-radius: 10px;
@@ -64,7 +64,7 @@ h4 {
   background: rgba(161, 171, 182,0.05);
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
   border-radius: 10px;
-  width: 20%;
+  width: 25%;
 }
 
 /* for content  */
@@ -72,20 +72,24 @@ h4 {
   margin:5px 10px 2px;
   background-color: rgba(161, 171, 182,0.05);
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
-  width: 40%;
+  width: 50%;
   display: flex;
   overflow: scroll;
   padding: 1% 3% 1%;
   border-radius: 10px;
 }
 
-#content > #box {
+.details {
+  overflow: scroll;
+  height: 75%;
+}
+
+.box {
   margin: 2%;
   border: 1px solid;
   padding: inherit;
   width: 527px;
   border-radius: 10px;
-  overflow: scroll;
 }
 
 .titleHeading {
@@ -97,7 +101,8 @@ h4 {
 .titleHeading > input {
   border: none;
   outline: none;
-  font-size: 200%;  
+  font-size: 200%; 
+  width: 436px; 
 } 
 
 .titleHeading > span {
@@ -133,26 +138,33 @@ li {
    margin: 1%;
 }
 
-#box > button {
+.addNewItem {
   margin: 2%;
   width: 95%;
   height: 30px;
   font-size: 80%;
 }
 
-.newItem {
- display: flex;
-    border-style: ridge;
-    border-radius: 8px;
-    padding: -1px;
-    padding: 4px 3px 4px;
+.addNewItem > button{
+  margin: 2%;
+  width: 95%;
+  height: 30px;
+  font-size: 80%;
 }
 
-#textarea {
+.textarea {
   height: 15px;
   width: 282%;
   padding: 1%;
   margin-top: 1.2%;
+}
+
+.newItem {
+  display: flex;
+  border-style: ridge;
+  border-radius: 8px;
+  padding: -1px;
+  padding: 4px 3px 4px;
 }
 
 .newItem > div {
