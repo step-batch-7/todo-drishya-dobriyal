@@ -1,7 +1,7 @@
 const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   statusCode ? statusCode = 'checked' : statusCode = '';
   return `<input type="checkBox"  onclick="toggleStatus()" ${statusCode}></input>
-            <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"></input>
+            <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
           <div onclick="deleteItem()" class="deleteItem"  id='${id}'> - </div>`;
 };
 
@@ -39,8 +39,8 @@ const newItemTemplate = (id) => {
   div.innerHTML =
     `<input type="checkBox" onclick="toggleStatus"></input>
       <input id='textarea' type="text" required></input>
-      <div onclick="saveNewItem()"  class="newItem" id='${id}'> + </div>
-      <div onclick="deleteItem()" class="deleteItem" id='${id}'> - </div>`;
+      <div onclick="saveNewItem()"  id='${id}'> + </div>
+      <div onclick="deleteItem()"  id='${id}'> - </div>`;
   return div;
 };
 

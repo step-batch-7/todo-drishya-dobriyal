@@ -1,17 +1,5 @@
-body {
+ body {
   font-family: sans-serif;
-}
-
-h1 {
-  margin-top: 15px;
-}
-
-h4 {
-  font-size:20px;
-  border-style: outset;
-  padding-left:20px;
-  border-radius: 5px;
-  margin:20px 80px 0px;
 }
 
 #heading {
@@ -31,6 +19,55 @@ h4 {
   width: 100%;
 }
 
+/* for todoSearch */
+
+h4 {
+  font-size:20px;
+  border-style: outset;
+  padding-left:20px;
+  border-radius: 5px;
+  margin:20px 80px 0px;
+}
+
+#todoSearch {
+  width: 30%;
+  background: rgba(161, 171, 182,0.05 );
+  padding:0% 2% 0%;
+  border-radius: 10px;
+  margin:5px 5px 2px;
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
+}
+
+#search > input {
+  height: 20px;
+  width: 50%;
+  margin: 1%;
+  padding: 1%;
+}
+
+
+/* for todo titles */
+
+.titles {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  padding: 5px;
+  border: 1px solid lightgray;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 7px;
+}
+
+#todoList {
+  margin:5px 5px 2px;
+  background: rgba(161, 171, 182,0.05);
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
+  border-radius: 10px;
+  width: 20%;
+}
+
+/* for content  */
 #content {
   margin:5px 10px 2px;
   background-color: rgba(161, 171, 182,0.05);
@@ -46,43 +83,93 @@ h4 {
   margin: 2%;
   border: 1px solid;
   padding: inherit;
-  /* overflow: scroll; */
-}
-
-.titles {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    padding: 5px;
-    border: 1px solid lightgray;
-    width: 90%;
-    margin: 0 auto;
-    margin-bottom: 7px;
-}
-
-#todoSearch {
-  width: 30%;
-  background: rgba(161, 171, 182,0.05 );
-  padding:0% 2% 0%;
+  width: 527px;
   border-radius: 10px;
-  margin:5px 5px 2px;
-  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
-}
-#search > input {
-  height: 20px;
-  width: 50%;
-  margin: 1%;
-  padding: 1%;
+  overflow: scroll;
 }
 
-.item {
+.titleHeading {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
+.titleHeading > input {
+  border: none;
+  outline: none;
+  font-size: 200%;  
+} 
+
+.titleHeading > span {
+  display: flex;
+  justify-content: space-around;
+  font-size: 250%;
+  margin: 3%;
+}
+
+li {
+ border-style:ridge;
+  padding-left:10px;
+  border-radius:5px;
+  margin-bottom:5px;
+  padding-top: 1%;
+  list-style-type:none
+}
+
+.inputTask {
+  border: none;
+  outline: none;
+  font-size: 130%;
+  width: 90%;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.deleteItem {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgba(46, 30, 10, 0.196);
+   border-radius: 3px;
+   margin: 1%;
+}
+
+#box > button {
+  margin: 2%;
+  width: 95%;
+  height: 30px;
+  font-size: 80%;
+}
+
+.newItem {
+ display: flex;
+    border-style: ridge;
+    border-radius: 8px;
+    padding: -1px;
+    padding: 4px 3px 4px;
+}
+
+#textarea {
+  height: 15px;
+  width: 282%;
+  padding: 1%;
+  margin-top: 1.2%;
+}
+
+.newItem > div {
+  width: 4%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2%;
+}
+
+/* .item {
+  display: flex;
+} */
+/* 
 .item > div {
   border: 1px solid;
-}
-
+} */
+/* 
 .template {
   margin: 2%;
   padding: 1.5%;
@@ -91,49 +178,21 @@ h4 {
   width: 200px;
   height: 200px;
   overflow: scroll;
-}
-
+} */
+/* 
 .editTodo {
   font-size: 15px;
-}
+} */
 
-button {
-  margin: 2%;
-}
 
-#todoList {
-  margin:5px 5px 2px;
-  background: rgba(161, 171, 182,0.05);
-  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
-  border-radius: 10px;
-  width: 20%;
-}
 
-#todoList > li {
-  padding: 2%;
-  margin: 2% 7% 2% 7%;
-  border-style: outset;
-  border-radius: 5px;
-}
-
-.details > .titleHeading {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.details > .titleHeading > input {
-  border: none;
-  outline: none;
-  font-size: 200%;
-}
-
+/* 
 .details > .titleHeading > span {
   display: flex;
   justify-content: space-around;
   font-size: 250%;
-}
-
+} */
+/* 
 .details > div > li {
   border-style:ridge;
   padding-left:10px;
@@ -141,29 +200,19 @@ button {
   margin-bottom:5px;
   word-wrap: break-word;
   word-break: break-all;
-}
-
+} */
+/* 
 .newItem {
   display: flex;
   justify-content: center;
   border-style:ridge;
   margin-top: 2%;
   margin-bottom: 1%;
-}
-
+} */
+/* 
 .newItem > div {
   display: flex;
   justify-content: center;
-}
+} */
 
-.deleteItem {
-  display: flex;
-  justify-content: space-evenly;
-  background-color: rgba(46, 30, 10, 0.2);
-}
-#textarea {
-  height: 15px;
-  width: 100%;
-  padding: 1%;
-  margin-top: 1.2%;
-}
+

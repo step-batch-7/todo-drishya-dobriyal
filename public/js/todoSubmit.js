@@ -120,7 +120,7 @@ const displayMatch = (search) => {
     });
     document.getElementById('content').innerHTML = allTodo;
   };
-  xhr.open('POST', '/findGivenTitle');
+  xhr.open('POST', '/findGivenContent');
   xhr.send(JSON.stringify({ content, search }));
 }
 

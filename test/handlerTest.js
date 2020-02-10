@@ -40,6 +40,7 @@ describe('GET method', function () {
   });
 });
 
+
 describe("POST saveData", function () {
   let dataStore;
   before(() => {
@@ -48,61 +49,97 @@ describe("POST saveData", function () {
   after(() => {
     fs.writeFileSync(DATA_STORE, dataStore);
   })
-  it('should save title on /saveTitle Req', function (done) {
-    request(app.serve.bind(app))
-      .post('/saveTitle')
-      .set('Accept', '*/*')
-      .send('{"title":"Bat"}')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("save title", function () {
+    it('should save title on /saveTitle Req', function (done) {
+      request(app.serve.bind(app))
+        .post('/saveTitle')
+        .set('Accept', '*/*')
+        .send('{"title":"Bat"}')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should save item on /saveItem Req', function (done) {
-    request(app.serve.bind(app))
-      .post('/saveItem')
-      .set('Accept', '*/*')
-      .send('{ "task": { "item": "new Item", "statusCode": "false" }, "id":"T_1" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("save item", function () {
+    it('should save item on /saveItem Req', function (done) {
+      request(app.serve.bind(app))
+        .post('/saveItem')
+        .set('Accept', '*/*')
+        .send('{ "task": { "item": "new Item", "statusCode": "false" }, "id":"T_1" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should delete item on /deleteItem Req', function (done) {
-    request(app.serve.bind(app))
-      .post('/deleteItem')
-      .set('Accept', '*/*')
-      .send('{ "itemId": "I_1", "titleId":"T_1" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("delete item", function () {
+    it('should delete item on /deleteItem Req', function (done) {
+      request(app.serve.bind(app))
+        .post('/deleteItem')
+        .set('Accept', '*/*')
+        .send('{ "itemId": "I_2", "titleId":"T_1" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should delete item on /deleteTitle Req', function (done) {
-    request(app.serve.bind(app))
-      .post('/deleteTitle')
-      .set('Accept', '*/*')
-      .send('{ "titleId":"T_1" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("delete title", function () {
+    it('should delete title on /deleteTitle Req', function (done) {
+      request(app.serve.bind(app))
+        .post('/deleteTitle')
+        .set('Accept', '*/*')
+        .send('{ "titleId":"T_2" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should delete item on /toggleStatus Req', function (done) {
-    request(app.serve.bind(app))
-      .post('/toggleStatus')
-      .set('Accept', '*/*')
-      .send('{ "itemId": "I_3", "titleId":"T_2" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("toggle status", function () {
+    it('should toggle status on /toggleStatus Req', function (done) {
+      request(app.serve.bind(app))
+        .post('/toggleStatus')
+        .set('Accept', '*/*')
+        .send('{ "itemId": "I_1", "titleId":"T_1" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should change title on /changeTitle req ', function (done) {
-    request(app.serve.bind(app))
-      .post('/changeTitle')
-      .set('Accept', '*/*')
-      .send('{ "newTitle": "subject", "id":"T_2" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("change title", function () {
+    it('should change title on /changeTitle req ', function (done) {
+      request(app.serve.bind(app))
+        .post('/changeTitle')
+        .set('Accept', '*/*')
+        .send('{ "newTitle": "subject", "id":"T_2" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
   });
-  it('should change title on /changeItem req ', function (done) {
-    request(app.serve.bind(app))
-      .post('/changeItem')
-      .set('Accept', '*/*')
-      .send('{ "newItem": "subject", "titleId":"T_2", "itemId":"I_3" }')
-      .expect(200, done)
-      .expect('Content-Type', 'application/json')
+  describe("change item", function () {
+    it('should change item on /changeItem req ', function (done) {
+      request(app.serve.bind(app))
+        .post('/changeItem')
+        .set('Accept', '*/*')
+        .send('{ "newItem": "subject", "titleId":"T_2", "itemId":"I_3" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
+  });
+  describe("search title", function () {
+    it('should search title on /findGivenContent req ', function (done) {
+      request(app.serve.bind(app))
+        .post('/findGivenContent')
+        .set('Accept', '*/*')
+        .send('{ "content": "english", "search":"title" }')
+        .expect(200, done)
+        .expect(/english/)
+        .expect('Content-Type', 'application/json')
+    });
+  });
+  describe("search task", function () {
+    it('should search task on /findGivenContent req ', function (done) {
+      request(app.serve.bind(app))
+        .post('/findGivenContent')
+        .set('Accept', '*/*')
+        .send('{ "content": "chapter1", "search":"item" }')
+        .expect(200, done)
+        .expect(/chapter1/)
+        .expect('Content-Type', 'application/json')
+    });
   });
 });
 
