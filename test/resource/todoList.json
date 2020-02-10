@@ -30,5 +30,21 @@
         "statusCode": false
       }
     ]
+  },
+  {
+    "title": "components",
+    "id": "T_2",
+    "tasks": [
+      {
+        "item": "component1",
+        "id": "I_5",
+        "statusCode": false
+      },
+      {
+        "item": "component2",
+        "id": "I_6",
+        "statusCode": false
+      }
+    ]
   }
 ]

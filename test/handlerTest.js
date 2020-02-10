@@ -124,20 +124,20 @@ describe("POST saveData", function () {
       request(app.serve.bind(app))
         .post('/findGivenContent')
         .set('Accept', '*/*')
-        .send('{ "content": "english", "search":"title" }')
+        .send('{ "content": "components", "search":"title" }')
         .expect(200, done)
-        .expect(/english/)
+        .expect(/components/)
         .expect('Content-Type', 'application/json')
     });
   });
   describe("search task", function () {
-    it.skip('should search task on /findGivenContent req ', function (done) {
+    it('should search task on /findGivenContent req ', function (done) {
       request(app.serve.bind(app))
         .post('/findGivenContent')
         .set('Accept', '*/*')
-        .send('{ "content": "chapter1", "search":"item" }')
+        .send('{ "content": "component1", "search":"item" }')
         .expect(200, done)
-        .expect(/chapter/)
+        .expect(/component1/)
         .expect('Content-Type', 'application/json')
     });
   });
