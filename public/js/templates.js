@@ -26,10 +26,10 @@ const showTitleTemplate = () => {
           <button onclick="saveTitle()">DONE</button>`;
 };
 
-const createNewItemTemplate = data => {
+const createNewItemTemplate = (data, id) => {
   const li = document.createElement('li');
   li.setAttribute('id', data.id);
-  li.innerHTML = createItemTemplate(data);
+  li.innerHTML = createItemTemplate(data, id);
   return li;
 };
 

@@ -3,9 +3,8 @@ const toggleStatus = () => {
   const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.parentNode.id;
   const postBody = JSON.stringify({ newStatus, titleId, itemId });
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/toggleStatus');
-  xhr.send(postBody);
+  const callback = () => {};
+  sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
 
 const saveNewItem = () => {
@@ -15,7 +14,7 @@ const saveNewItem = () => {
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const callback = item => {
     const todoItem = JSON.parse(item);
-    const li = createNewItemTemplate(todoItem);
+    const li = createNewItemTemplate(todoItem, id);
     document.querySelector(`.details`).appendChild(li);
     document.querySelector('.newItem').remove();
   };
@@ -32,10 +31,15 @@ const deleteItem = () => {
   const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.id;
   const postBody = JSON.stringify({ titleId, itemId });
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/deleteItem');
-  xhr.send(postBody);
-  event.target.parentNode.remove();
+  const callback = (item, responseText) => {
+    item.remove();
+  };
+  sendNewRequest(
+    'POST',
+    '/deleteItem',
+    postBody,
+    callback.bind(null, event.target.parentNode)
+  );
 };
 
 const saveTitle = () => {
@@ -53,18 +57,15 @@ const saveTitle = () => {
 
 const displayTodo = () => {
   const id = event.target.id;
-  const xhr = new XMLHttpRequest();
-  xhr.onload = () => {
-    const content = JSON.parse(xhr.responseText);
-    const userData = content;
+  const callback = allTodo => {
+    const userData = JSON.parse(allTodo);
     const todo = userData.find(data => {
       return data.id === id;
     });
     const todoTemplate = createTodoTemplate(todo);
     document.getElementById('content').innerHTML = todoTemplate;
   };
-  xhr.open('GET', '/todoList.json');
-  xhr.send();
+  sendNewRequest('GET', '/todoList.json', undefined, callback);
 };
 
 const displayTodoList = () => {
@@ -80,43 +81,42 @@ const displayTodoList = () => {
 const deleteTitle = () => {
   const xhr = new XMLHttpRequest();
   const id = event.target.id;
-  postBody = JSON.stringify({ id });
-  xhr.open('POST', '/deleteTitle');
-  xhr.send(postBody);
-  document.querySelector(`.box`).remove();
-  document.querySelector(`#todoList #${id}`).remove();
+  const postBody = JSON.stringify({ id });
+  const callback = () => {
+    document.querySelector(`.box`).remove();
+    document.querySelector(`#todoList #${id}`).remove();
+  };
+  sendNewRequest('POST', '/deleteTitle', postBody, callback);
 };
 
 const changeTitle = id => {
-  const xhr = new XMLHttpRequest();
   const newTitle = event.target.value;
-  document.querySelector(`.titles#${id}`).innerText = newTitle;
   const postBody = JSON.stringify({ id, newTitle });
-  xhr.open('POST', '/changeTitle');
-  xhr.send(postBody);
+  const callback = () => {
+    document.querySelector(`.titles#${id}`).innerText = newTitle;
+  };
+  sendNewRequest('POST', '/changeTitle', postBody, callback);
 };
 
 const changeItem = (itemId, titleId) => {
-  const xhr = new XMLHttpRequest();
   const newItem = event.target.value;
   const postBody = JSON.stringify({ titleId, itemId, newItem });
-  xhr.open('POST', '/changeItem');
-  xhr.send(postBody);
+  const callback = () => {};
+  sendNewRequest('POST', '/changeItem', postBody, callback);
 };
 
 const displayMatch = search => {
-  const xhr = new XMLHttpRequest();
   const content = event.target.value;
-  xhr.onload = () => {
-    const content = JSON.parse(xhr.responseText);
+  const postBody = JSON.stringify({ content, search });
+  const callback = searchedTodo => {
+    const content = JSON.parse(searchedTodo);
     let allTodo = '';
     content.forEach(todo => {
       allTodo += createTodoTemplate(todo);
     });
     document.getElementById('content').innerHTML = allTodo;
   };
-  xhr.open('POST', '/findGivenContent');
-  xhr.send(JSON.stringify({ content, search }));
+  sendNewRequest('POST', '/findGivenContent', postBody, callback);
 };
 
 const sendNewRequest = function(method, url, data, callback) {
