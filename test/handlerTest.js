@@ -43,10 +43,10 @@ describe('GET method', function () {
 
 describe("POST saveData", function () {
   let dataStore;
-  before(() => {
+  beforeEach(() => {
     dataStore = fs.readFileSync(DATA_STORE, 'utf8');
   })
-  after(() => {
+  afterEach(() => {
     fs.writeFileSync(DATA_STORE, dataStore);
   })
   describe("save title", function () {
@@ -84,7 +84,7 @@ describe("POST saveData", function () {
       request(app.serve.bind(app))
         .post('/deleteTitle')
         .set('Accept', '*/*')
-        .send('{ "titleId":"T_2" }')
+        .send('{ "titleId":"T_1" }')
         .expect(200, done)
         .expect('Content-Type', 'application/json')
     });
@@ -94,17 +94,7 @@ describe("POST saveData", function () {
       request(app.serve.bind(app))
         .post('/toggleStatus')
         .set('Accept', '*/*')
-        .send('{ "itemId": "I_1", "titleId":"T_1" }')
-        .expect(200, done)
-        .expect('Content-Type', 'application/json')
-    });
-  });
-  describe("change title", function () {
-    it('should change title on /changeTitle req ', function (done) {
-      request(app.serve.bind(app))
-        .post('/changeTitle')
-        .set('Accept', '*/*')
-        .send('{ "newTitle": "subject", "id":"T_2" }')
+        .send('{ "itemId": "I_3", "titleId":"T_2" }')
         .expect(200, done)
         .expect('Content-Type', 'application/json')
     });
@@ -115,6 +105,16 @@ describe("POST saveData", function () {
         .post('/changeItem')
         .set('Accept', '*/*')
         .send('{ "newItem": "subject", "titleId":"T_2", "itemId":"I_3" }')
+        .expect(200, done)
+        .expect('Content-Type', 'application/json')
+    });
+  });
+  describe("change title", function () {
+    it('should change title on /changeTitle req ', function (done) {
+      request(app.serve.bind(app))
+        .post('/changeTitle')
+        .set('Accept', '*/*')
+        .send('{ "newTitle": "subject", "id":"T_2" }')
         .expect(200, done)
         .expect('Content-Type', 'application/json')
     });
