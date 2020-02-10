@@ -72,15 +72,13 @@ const displayTodo = () => {
 };
 
 const displayTodoList = () => {
-  const xhr = new XMLHttpRequest();
-  xhr.onload = () => {
-    const content = JSON.parse(xhr.responseText);
+  const callback = list => {
+    const content = JSON.parse(list);
     const userData = content;
     const html = todoListTemplate(userData);
     document.getElementById('todoList').innerHTML = html;
   };
-  xhr.open('GET', '/todoList.json');
-  xhr.send();
+  sendNewRequest('GET', '/todoList.json', undefined, callback);
 };
 
 const deleteTitle = () => {
@@ -123,6 +121,15 @@ const displayMatch = search => {
   };
   xhr.open('POST', '/findGivenContent');
   xhr.send(JSON.stringify({ content, search }));
+};
+
+const sendNewRequest = function(method, url, data, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = () => {
+    callback(xhr.responseText);
+  };
+  xhr.open(method, url);
+  xhr.send(data);
 };
 
 document.onload = displayTodoList();
