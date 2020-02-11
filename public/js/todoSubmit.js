@@ -122,7 +122,9 @@ const displayMatch = search => {
 const sendNewRequest = function(method, url, data, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
-    callback(xhr.responseText);
+    if (xhr.status === 200) {
+      callback(xhr.responseText);
+    }
   };
   xhr.open(method, url);
   xhr.send(data);
