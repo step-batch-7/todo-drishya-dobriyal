@@ -43,7 +43,8 @@ describe('GET method', function() {
 
 describe('POST saveData', function() {
   beforeEach(() => {
-    sinon.replace(fs, 'writeFileSync', () => {});
+    const fake = sinon.fake();
+    sinon.replace(fs, 'writeFile', fake);
   });
   afterEach(() => {
     sinon.restore();
@@ -85,7 +86,7 @@ describe('POST saveData', function() {
       request(app.serve.bind(app))
         .post('/deleteTitle')
         .set('Accept', '*/*')
-        .send('{ "titleId":"T_1" }')
+        .send('{ "id":"T_1" }')
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
@@ -95,7 +96,7 @@ describe('POST saveData', function() {
       request(app.serve.bind(app))
         .post('/toggleStatus')
         .set('Accept', '*/*')
-        .send('{ "itemId": "I_3", "titleId":"T_2" }')
+        .send('{ "itemId": "I_3", "titleId":"T_2","newStatus": "true" }')
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
