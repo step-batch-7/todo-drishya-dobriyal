@@ -2,21 +2,22 @@
 
 <head>
   <title>Login page</title>
-  <link rel="stylesheet" href="loginPage.css">
+  <link rel="stylesheet" href="/css/loginPage.css">
+  <script src="/js/signup.js"></script>
 </head>
 
 <body>
   <div id="heading">
-    <img src="./public/images/banner.png" alt="logo" height="80px" width="80px">
+    <img src="/images/banner.png" alt="logo" height="80px" width="80px">
     <h1>TODO</h1>
   </div>
   <div class="signUpPage">
     <div class="block">
       <div class="userInputs">
-        <input type="text" id="username" placeholder="Username">
+        <input type="text" id="username" placeholder="Username" >
         <input type="password" id="password" placeholder="Password">
       </div>
-      <button class="button">SignUP</button>
+      <button class="button" onclick="signUp()">SignUP</button>
     </div>
   </div>
 </body>
