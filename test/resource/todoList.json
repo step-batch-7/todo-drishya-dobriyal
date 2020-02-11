@@ -3,7 +3,7 @@
     "title": "subject",
     "id": "T_1",
     "tasks": [
-      { "item": "subject", "id": "I_1", "statusCode": "true" },
+      { "item": "subject", "id": "I_1", "statusCode": true },
       { "item": "chapter2", "id": "I_2", "statusCode": false }
     ]
   },
@@ -11,7 +11,7 @@
     "title": "subject",
     "id": "T_2",
     "tasks": [
-      { "item": "subject", "id": "I_3", "statusCode": "true" },
+      { "item": "subject", "id": "I_3", "statusCode": true },
       { "item": "chapter2", "id": "I_4", "statusCode": false }
     ]
   },
