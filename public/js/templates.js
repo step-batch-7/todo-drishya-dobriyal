@@ -1,8 +1,8 @@
 const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   statusCode ? (statusCode = 'checked') : (statusCode = '');
-  return `<input type="checkBox"  onclick="toggleStatus()" ${statusCode} title="toggle status"></input>
+  return `<input class="checkBox" type="checkBox"  onclick="toggleStatus()" ${statusCode} title="toggle status"></input>
             <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
-          <div onclick="deleteItem()" class="deleteItem"  id='${id}' title="delete item"> - </div>`;
+          <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteItem()" id='${id}' title="delete item"></i>`;
 };
 
 const createTodoTemplate = todo => {
@@ -37,8 +37,7 @@ const newItemTemplate = id => {
   const div = document.createElement('div');
   div.classList.add('newItem');
   div.setAttribute('id', id);
-  div.innerHTML = `<input type="checkBox" onclick="toggleStatus()"></input>
-      <input class='textarea' type="text" required></input>
+  div.innerHTML = `<input class='textarea' type="text" required></input>
       <div onclick="saveNewItem()"  id='${id}' title="save task"> + </div>
       <div onclick="deleteItem()"  id='${id}' title="delete task"> - </div>`;
   return div;

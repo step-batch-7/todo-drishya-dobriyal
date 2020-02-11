@@ -64,7 +64,7 @@ describe('POST saveData', function() {
         .post('/saveTitle')
         .set('Accept', '*/*')
         .send('{"titl":"Bat"}')
-        .expect(400, done)
+        .expect(400, done);
     });
   });
   describe('save item', function() {
@@ -86,7 +86,7 @@ describe('POST saveData', function() {
         .send(
           '{ "tas": { "item": "new Item", "statusCode": "false" }, "id":"T_1" }'
         )
-        .expect(400,done)
+        .expect(400, done);
     });
   });
   describe('delete item', function() {
@@ -98,12 +98,12 @@ describe('POST saveData', function() {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should give bad request if data is not appropriate',function(done){
-       request(app.serve.bind(app))
-         .post('/deleteItem')
-         .set('Accept', '*/*')
-         .send('{ "itemI": "I_2", "titleId":"T_1" }')
-         .expect(400, done)
+    it('should give bad request if data is not appropriate', function(done) {
+      request(app.serve.bind(app))
+        .post('/deleteItem')
+        .set('Accept', '*/*')
+        .send('{ "itemI": "I_2", "titleId":"T_1" }')
+        .expect(400, done);
     });
   });
   describe('delete title', function() {
@@ -128,17 +128,17 @@ describe('POST saveData', function() {
       request(app.serve.bind(app))
         .post('/toggleStatus')
         .set('Accept', '*/*')
-        .send('{ "itemId": "I_3", "titleId":"T_2","newStatus": "true" }')
+        .send('{ "itemId": "I_3", "titleId":"T_2"}')
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should give bad request if data is not appropriate',function(done){
-       request(app.serve.bind(app))
-         .post('/toggleStatus')
-         .set('Accept', '*/*')
-         .send('{ "iemId": "I_3", "titleId":"T_2","newStatus": "true" }')
-         .expect(400, done)
-    })
+    it('should give bad request if data is not appropriate', function(done) {
+      request(app.serve.bind(app))
+        .post('/toggleStatus')
+        .set('Accept', '*/*')
+        .send('{ "iemId": "I_3", "titleId":"T_2" }')
+        .expect(400, done);
+    });
   });
   describe('change item', function() {
     it('should change item on /changeItem req ', function(done) {
@@ -149,13 +149,13 @@ describe('POST saveData', function() {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should give bad request if data is not appropriate',function(done){
-       request(app.serve.bind(app))
-         .post('/changeItem')
-         .set('Accept', '*/*')
-         .send('{ "newIewqftem": "subject", "titleId":"T_2", "itemId":"I_3" }')
-         .expect(400, done);
-    })
+    it('should give bad request if data is not appropriate', function(done) {
+      request(app.serve.bind(app))
+        .post('/changeItem')
+        .set('Accept', '*/*')
+        .send('{ "newIewqftem": "subject", "titleId":"T_2", "itemId":"I_3" }')
+        .expect(400, done);
+    });
   });
   describe('change title', function() {
     it('should change title on /changeTitle req ', function(done) {
@@ -184,12 +184,12 @@ describe('POST saveData', function() {
         .expect(/components/)
         .expect('Content-Type', 'application/json');
     });
-    it('should give bad request if data is not appropriate', function(done){
-       request(app.serve.bind(app))
-         .post('/findGivenContent')
-         .set('Accept', '*/*')
-         .send('{ "contnt": "components", "search":"title" }')
-         .expect(400, done);
+    it('should give bad request if data is not appropriate', function(done) {
+      request(app.serve.bind(app))
+        .post('/findGivenContent')
+        .set('Accept', '*/*')
+        .send('{ "contnt": "components", "search":"title" }')
+        .expect(400, done);
     });
   });
   describe('search task', function() {
@@ -202,13 +202,13 @@ describe('POST saveData', function() {
         .expect(/component1/)
         .expect('Content-Type', 'application/json');
     });
-     it('should give bad request if data is not appropriate', function(done) {
-       request(app.serve.bind(app))
-         .post('/findGivenContent')
-         .set('Accept', '*/*')
-         .send('{ "contnt": "components", "serch":"item" }')
-         .expect(400, done);
-     });
+    it('should give bad request if data is not appropriate', function(done) {
+      request(app.serve.bind(app))
+        .post('/findGivenContent')
+        .set('Accept', '*/*')
+        .send('{ "contnt": "components", "serch":"item" }')
+        .expect(400, done);
+    });
   });
 });
 

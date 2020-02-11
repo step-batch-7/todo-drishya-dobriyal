@@ -1,14 +1,14 @@
- body {
+body {
   font-family: sans-serif;
 }
 
 #heading {
-  background-color: rgba(199, 109, 199,0.2);
-  box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.4);
+  background-color: rgba(199, 109, 199, 0.2);
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.4);
   font-size: 20px;
-  display:flex;
-  justify-content:center;
-  margin-bottom:5px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
   border-radius: 10px;
 }
 
@@ -22,20 +22,20 @@
 /* for todoSearch */
 
 h4 {
-  font-size:20px;
+  font-size: 20px;
   border-style: outset;
-  padding-left:20px;
+  padding-left: 20px;
   border-radius: 5px;
-  margin:20px 80px 0px;
+  margin: 20px 80px 0px;
 }
 
 #todoSearch {
   width: 35%;
-  background: rgba(161, 171, 182,0.05 );
-  padding:0% 2% 0%;
+  background: rgba(161, 171, 182, 0.05);
+  padding: 0% 2% 0%;
   border-radius: 10px;
-  margin:5px 5px 2px;
-  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
+  margin: 5px 5px 2px;
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.15);
 }
 
 #search > input {
@@ -44,7 +44,6 @@ h4 {
   margin: 1%;
   padding: 1%;
 }
-
 
 /* for todo titles */
 
@@ -60,18 +59,18 @@ h4 {
 }
 
 #todoList {
-  margin:5px 5px 2px;
-  background: rgba(161, 171, 182,0.05);
-  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.1);
+  margin: 5px 5px 2px;
+  background: rgba(161, 171, 182, 0.05);
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 25%;
 }
 
 /* for content  */
 #content {
-  margin:5px 10px 2px;
-  background-color: rgba(161, 171, 182,0.05);
-  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0,0.15);
+  margin: 5px 10px 2px;
+  background-color: rgba(161, 171, 182, 0.05);
+  box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.15);
   width: 50%;
   display: flex;
   overflow: scroll;
@@ -101,9 +100,9 @@ h4 {
 .titleHeading > input {
   border: none;
   outline: none;
-  font-size: 200%; 
-  width: 436px; 
-} 
+  font-size: 200%;
+  width: 436px;
+}
 
 .titleHeading > span {
   display: flex;
@@ -112,13 +111,16 @@ h4 {
   margin: 3%;
 }
 
+.checkbox {
+  margin: 15px 5px 15px;
+}
 li {
- border-style:ridge;
-  padding-left:10px;
-  border-radius:5px;
-  margin-bottom:5px;
-  padding-top: 1%;
-  list-style-type:none
+  border-style: ridge;
+  padding-left: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 1%;
+  list-style-type: none;
 }
 
 .inputTask {
@@ -134,8 +136,8 @@ li {
   display: flex;
   justify-content: space-evenly;
   background-color: rgba(46, 30, 10, 0.196);
-   border-radius: 3px;
-   margin: 1%;
+  border-radius: 3px;
+  margin: 1%;
 }
 
 .addNewItem {
@@ -145,7 +147,7 @@ li {
   font-size: 80%;
 }
 
-.addNewItem > button{
+.addNewItem > button {
   margin: 2%;
   width: 95%;
   height: 30px;

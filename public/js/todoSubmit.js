@@ -1,8 +1,7 @@
 const toggleStatus = () => {
-  const newStatus = event.target.checked;
   const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.parentNode.id;
-  const postBody = JSON.stringify({ newStatus, titleId, itemId });
+  const postBody = JSON.stringify({ titleId, itemId });
   const callback = () => {};
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
