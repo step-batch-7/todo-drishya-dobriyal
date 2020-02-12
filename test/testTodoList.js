@@ -1,4 +1,4 @@
-const { TodoList, Todo } = require('../lib/todo');
+const { TodoList } = require('../lib/todo');
 
 const { assert } = require('chai');
 
@@ -178,6 +178,43 @@ describe('TodoList', () => {
       const expected = [];
       const matched = todoList.match('task', 'task4566');
       assert.deepStrictEqual(matched, expected);
+    });
+  });
+
+  describe('toggleStatus', function() {
+    const data = [
+      {
+        title: 'english',
+        id: 'T_1',
+        tasks: [
+          { item: 'topic1', id: 'I_1', statusCode: false },
+          { item: 'topic2', id: 'I_2', statusCode: false }
+        ]
+      }
+    ];
+    const todoList = TodoList.load(data);
+    it('should change the status of given task', function() {
+      todoList.toggleStatus('T_1', 'I_2');
+      const todo = todoList.getTodoFromId('T_1');
+      assert.isTrue(todo.getTaskFromId('I_2').statusCode);
+    });
+  });
+
+  describe('getTodoDetails', function() {
+    it('should give all the todos ', function() {
+      const data = [
+        {
+          title: 'english',
+          id: 'T_1',
+          tasks: [
+            { item: 'topic1', id: 'I_1', statusCode: false },
+            { item: 'topic2', id: 'I_2', statusCode: false }
+          ]
+        }
+      ];
+      const todoList = TodoList.load(data);
+      const todo = todoList.getTodoDetails();
+      assert.deepStrictEqual(todo, data);
     });
   });
 });
