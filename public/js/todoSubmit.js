@@ -49,7 +49,7 @@ const saveTitle = () => {
     const { title, id, tasks } = JSON.parse(todo);
     const li = displayNewTitle(id, title);
     document.getElementById('todoList').appendChild(li);
-    document.getElementById('tasks').innerHTML = showTitleTemplate();
+    document.getElementById('title').value = '';
   };
   sendNewRequest('POST', '/saveTitle', postBody, callback);
 };

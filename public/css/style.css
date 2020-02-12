@@ -38,11 +38,24 @@ h4 {
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.15);
 }
 
-#search > input {
+#plus {
+  content: url(/images/plus.png);
+  width: 27px;
+  height: 27px;
+  padding-top: 17px;
+}
+
+#tasks {
+  display: flex;
+  flex-direction: row;
+}
+
+#todoSearch input {
   height: 20px;
   width: 50%;
-  margin: 1%;
+  margin: 3% 3% 3%;
   padding: 1%;
+  font-size: medium;
 }
 
 /* for todo titles */
@@ -166,7 +179,7 @@ li {
   border-style: ridge;
   border-radius: 8px;
   padding: -1px;
-  padding: 4px 3px 4px;
+  padding: 3px 8px 4px;
 }
 
 .newItem > div {
