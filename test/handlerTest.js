@@ -188,7 +188,7 @@ describe('POST saveData', function() {
       request(app.serve.bind(app))
         .post('/findGivenContent')
         .set('Accept', '*/*')
-        .send('{ "contnt": "components", "search":"title" }')
+        .send('{ "contnt": "components", "seach":"title" }')
         .expect(400, done);
     });
   });

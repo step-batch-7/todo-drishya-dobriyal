@@ -21,12 +21,20 @@ body {
 
 /* for todoSearch */
 
+.blocks {
+  margin: 36px 0px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.4);
+  padding-top: 1px;
+}
+
 h4 {
   font-size: 20px;
-  border-style: outset;
   padding-left: 20px;
   border-radius: 5px;
   margin: 20px 80px 0px;
+  text-align: center;
 }
 
 #todoSearch {
@@ -52,7 +60,7 @@ h4 {
 
 #todoSearch input {
   height: 20px;
-  width: 50%;
+  width: 80%;
   margin: 3% 3% 3%;
   padding: 1%;
   font-size: medium;
@@ -86,6 +94,7 @@ h4 {
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.15);
   width: 50%;
   display: flex;
+  justify-content: end;
   overflow: scroll;
   padding: 1% 3% 1%;
   border-radius: 10px;
@@ -97,7 +106,7 @@ h4 {
 }
 
 .box {
-  margin: 2%;
+  margin: 10px 10px;
   border: 1px solid;
   padding: inherit;
   width: 527px;
