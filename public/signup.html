@@ -2,7 +2,7 @@
 
 <head>
   <title>SignUp Page</title>
-  <link rel="stylesheet" href="/css/loginPage.css">
+  <link rel="stylesheet" href="/css/signup.css">
   <script src="/js/signup.js"></script>
 </head>
 
@@ -12,14 +12,16 @@
     <h1>TODO</h1>
   </div>
   <div class="signUpPage">
-    <div class="block">
-      <h2 class="header">Sign Up</h2>
-      <div class="userInputs">
-        <input type="text" id="username" placeholder="Username" >
-        <input type="password" id="password" placeholder="Password">
+    <form action="/signUp" method="POST">
+      <div class="block">
+        <h2 class="header">Sign Up</h2>
+        <div class="userInputs">
+          <input type="text" name="username" id="username" placeholder="Username"></input>
+          <input type="password" name="password" id="password" placeholder="Password"></input>
+        </div>
+        <button class="button" type="submit">SignUP</button>
       </div>
-      <button class="button" onclick="signUp()">SignUP</button>
-    </div>
+    </form>
   </div>
 </body>
 

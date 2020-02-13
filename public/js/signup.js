@@ -1,4 +1,4 @@
-const signUp = function() {
+const signUp = function () {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
   const callback = () => console.log(username, password);
@@ -6,7 +6,7 @@ const signUp = function() {
   sendNewRequest('POST', '/signUp', postBody, callback);
 };
 
-const sendNewRequest = function(method, url, data, callback) {
+const sendNewRequest = function (method, url, data, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     callback(xhr.responseText);
