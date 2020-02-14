@@ -21,16 +21,15 @@
         <h4>CREATE TODO TITLE</h4>
         <div id="tasks">
           <input type="text" name="title" id="title" placeholder="Enter Title" required></input>
-          <!-- <button onclick="saveTitle()">DONE</button> -->
-          <img id="plus" onclick="saveTitle()"/>
+          <img id="plus" onclick="saveTitle()" />
         </div>
       </div>
-        <div class="blocks">
-          <h4>Search Engine</h4>
-          <div id="search"><input type="text" placeholder="search title" onkeyup="displayMatch('title')"></input>
-            <input type="text" placeholder="search task" onkeyup="displayMatch('task')"></input>
-          </div>
+      <div class="blocks">
+        <h4>Search Engine</h4>
+        <div id="search"><input type="text" placeholder="search title" onkeyup="displayMatch('title')"></input>
+          <input type="text" placeholder="search task" onkeyup="displayMatch('task')"></input>
         </div>
+      </div>
     </div>
 
     <div id="content"></div>

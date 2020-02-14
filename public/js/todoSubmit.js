@@ -2,7 +2,7 @@ const toggleStatus = () => {
   const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.parentNode.id;
   const postBody = JSON.stringify({ titleId, itemId });
-  const callback = () => {};
+  const callback = () => { };
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
 
@@ -100,7 +100,7 @@ const changeTitle = id => {
 const changeItem = (itemId, titleId) => {
   const newItem = event.target.value;
   const postBody = JSON.stringify({ titleId, itemId, newItem });
-  const callback = () => {};
+  const callback = () => { };
   sendNewRequest('POST', '/changeItem', postBody, callback);
 };
 
@@ -118,7 +118,7 @@ const displayMatch = search => {
   sendNewRequest('POST', '/findGivenContent', postBody, callback);
 };
 
-const sendNewRequest = function(method, url, data, callback) {
+const sendNewRequest = function (method, url, data, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
     if (xhr.status === 200) {
@@ -126,6 +126,7 @@ const sendNewRequest = function(method, url, data, callback) {
     }
   };
   xhr.open(method, url);
+  xhr.setRequestHeader('Content-type', 'application/json')
   xhr.send(data);
 };
 
