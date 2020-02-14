@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "export DATA_STORE=$(pwd)/test/resource/todoList.json; export USER_CREDENTIALS=$(pwd)test/resource/userCredentials.json;nyc mocha",
-    "start": "export DATA_STORE=$(pwd)/dataStore/usersData/todoList.json;export USER_CREDENTIALS=$(pwd)/dataStore/userCredentials.json; node server.js"
+    "start": "export DATA_STORE=$(pwd)/dataStore/todoStore.json;export USER_CREDENTIALS=$(pwd)/dataStore/userCredentials.json; node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/step-batch-7/todo-drishya-dobriyal#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "mocha": "^7.0.1",
     "sinon": "^8.1.1",

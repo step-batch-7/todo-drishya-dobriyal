@@ -64,7 +64,7 @@ const displayTodo = () => {
     const todoTemplate = createTodoTemplate(todo);
     document.getElementById('content').innerHTML = todoTemplate;
   };
-  sendNewRequest('GET', '/todoList.json', undefined, callback);
+  sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
 const displayTodoList = () => {
@@ -74,7 +74,7 @@ const displayTodoList = () => {
     const html = todoListTemplate(userData);
     document.getElementById('todoList').innerHTML = html;
   };
-  sendNewRequest('GET', '/todoList.json', undefined, callback);
+  sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
 const deleteTitle = () => {
@@ -127,7 +127,8 @@ const sendNewRequest = function (method, url, data, callback) {
   };
   xhr.open(method, url);
   xhr.setRequestHeader('Content-type', 'application/json')
+  xhr.setRequestHeader('Set-Cookie', document.cookie)
   xhr.send(data);
 };
 
-document.onload = displayTodoList();
+window.onload = displayTodoList();

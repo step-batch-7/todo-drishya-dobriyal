@@ -16,3 +16,6 @@ can avoid the access of dataStore to todoList
 can avoid getTodoMap for just copying the text
 
 modify the addItem Give responsibility of adding item to the todo class
+
+add new user in todoStore ,// every handler should know the user Name to access 
+change data structure of todoStore in order to add user to them 
