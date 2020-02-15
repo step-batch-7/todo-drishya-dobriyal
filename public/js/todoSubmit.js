@@ -1,3 +1,11 @@
+const logout = function () {
+  const callback = (response) => {
+    const { location } = JSON.parse(response);
+    window.location.href = location;
+  }
+  sendNewRequest('GET', '/logout', undefined, callback)
+}
+
 const toggleStatus = () => {
   const titleId = event.target.parentNode.parentNode.id;
   const itemId = event.target.parentNode.id;
