@@ -13,6 +13,10 @@ body {
   border-radius: 10px;
 }
 
+#existingStatus {
+  color: red;
+}
+
 .signUpPage {
   height: 635px;
   width: 100%;
