@@ -26,5 +26,5 @@ logout mechanism
 every time accessing to the localhost is redirecting to login 
 index.html > logo is not visible
 use app.locals to store the user data and todoData
-should inform user if user is already exists while typing 
+---done should inform user if user is already exists while typing 
 should inform user if password is incorrect
