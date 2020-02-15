@@ -19,3 +19,12 @@ modify the addItem Give responsibility of adding item to the todo class
 
 add new user in todoStore ,// every handler should know the user Name to access 
 change data structure of todoStore in order to add user to them 
+
+
+logout mechanism
+
+every time accessing to the localhost is redirecting to login 
+index.html > logo is not visible
+use app.locals to store the user data and todoData
+should inform user if user is already exists while typing 
+should inform user if password is incorrect
