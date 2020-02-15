@@ -23,7 +23,7 @@ change data structure of todoStore in order to add user to them
 
 logout mechanism
 
-every time accessing to the localhost is redirecting to login 
+---done every time accessing to the localhost is redirecting to login 
 index.html > logo is not visible
 use app.locals to store the user data and todoData
 ---done should inform user if user is already exists while typing 

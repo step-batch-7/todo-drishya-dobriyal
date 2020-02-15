@@ -3,6 +3,7 @@
 <head>
   <title>SignUp Page</title>
   <link rel="stylesheet" href="/user/css/loginPage.css">
+  <script src="/user/js/login.js"></script>
 </head>
 
 <body>
@@ -11,19 +12,18 @@
     <h1>TODO</h1>
   </div>
   <div class="signUpPage">
-    <form action="/login" method="POST">
-      <div class="block">
-        <h2 class="header"> Log In </h2>
-        <div class="userInputs">
-          <input type="text" name="username" id="username" placeholder="Username">
-          <input type="password" name="password" id="password" placeholder="Password">
-        </div>
-        <div class="buttonBlock">
-          <a class="signUpLink" href="/user/signup.html">SignUp</a>
-          <button class="button">Login</button>
-        </div>
+    <div class="block">
+      <h2 class="header"> Log In </h2>
+      <div class="userInputs">
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="password" name="password" id="password" placeholder="Password">
       </div>
-    </form>
+      <div class="buttonBlock">
+        <a class="signUpLink" href="/user/signup.html">Create Account</a>
+        <button class="button" onclick="loadLogin()">Login</button>
+      </div>
+      <div id="error"></div>
+    </div>
   </div>
 </body>
 

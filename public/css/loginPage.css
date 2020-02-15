@@ -14,7 +14,7 @@ body {
 }
 
 .signUpLink {
-  margin: 30px;
+  margin: 30px 24px 14px;
 }
 
 .buttonBlock {
@@ -63,4 +63,9 @@ button {
   height: 60%;
   font-size: 15px;
   width: 37%;
+}
+
+#error {
+  color: red;
+  text-align: center;
 }

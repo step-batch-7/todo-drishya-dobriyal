@@ -336,32 +336,40 @@ describe("signUp", function () {
 });
 
 describe("Login", function () {
-  it("should give login back if username and password are not matching", function (done) {
+  it("should give invalid password for incorrect password", function (done) {
     request(app)
       .post('/login')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('username=user&password=drishya')
-      .expect(303, done)
-      .expect('location', '/user/login.html')
+      .set('Content-type', 'application/json')
+      .send('{"username":"user","password":"incorrectPassword"}')
+      .expect(401, done)
+      .expect(/Invalid/)
   })
 
   it("should redirect to signUp page if user is not present", function (done) {
     request(app)
       .post('/login')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('username=usr&password=drishya')
+      .set('Content-type', 'application/json')
+      .send('{"username":"unauthorizedUser","password":"password"}')
       .expect(303, done)
-      .expect('location', '/user/signup.html')
+      .expect(/user\/signup.html/)
   })
 
   it("should give me cookie back if user and password are valid", function (done) {
     request(app)
       .post('/login')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('username=user&password=user')
+      .set('Content-type', 'application/json')
+      .send('{ "username": "user", "password": "user" }')
       .expect(303, done)
-      .expect('location', '/index.html')
+      .expect(/index.html/)
       .expect('Set-Cookie', /session_Id=user/)
+  })
+
+  it("should give bad request if data is not valid", function (done) {
+    request(app)
+      .post('/login')
+      .set('Content-type', 'application/json')
+      .send('{ "user": "user", "password": "user" }')
+      .expect(400, done)
   })
 });
 
