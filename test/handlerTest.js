@@ -333,6 +333,25 @@ describe("signUp", function () {
       .expect(303, done)
       .expect('location', '/user/login.html')
   })
+
+  describe("checkUserNameAvailability", function () {
+    it("should give true if username exists", function (done) {
+      request(app)
+        .post('/checkUserNameAvailability')
+        .set('Content-type', 'application/json')
+        .send('{"username":"user"}')
+        .expect(200, done)
+        .expect(/true/)
+    })
+    it("should give false if username do  not exists", function (done) {
+      request(app)
+        .post('/checkUserNameAvailability')
+        .set('Content-type', 'application/json')
+        .send('{"username":"us"}')
+        .expect(200, done)
+        .expect(/false/)
+    })
+  });
 });
 
 describe("Login", function () {
