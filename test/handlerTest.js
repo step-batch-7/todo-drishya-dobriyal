@@ -37,6 +37,13 @@ describe('GET method', function () {
       .set('Accept', '*/*')
       .expect(200, done);
   });
+  it('for /logout', function (done) {
+    request(app)
+      .get('/logout')
+      .set('cookie', 'session_Id=user_123')
+      .expect(200, done)
+      .expect(/login.html/)
+  });
   it('for /badFile', function (done) {
     request(app)
       .get('/badFile.html')
