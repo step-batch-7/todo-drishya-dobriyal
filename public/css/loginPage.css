@@ -63,9 +63,11 @@ button {
   height: 60%;
   font-size: 15px;
   width: 37%;
+  border-radius: 4px;
 }
 
 #error {
   color: red;
   text-align: center;
+  margin: 12px;
 }

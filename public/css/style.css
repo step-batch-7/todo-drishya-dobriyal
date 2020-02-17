@@ -97,6 +97,7 @@ h4 {
   width: 90%;
   margin: 0 auto;
   margin-bottom: 7px;
+  cursor: pointer;
 }
 
 #todoList {
@@ -131,6 +132,10 @@ h4 {
   padding: inherit;
   width: 527px;
   border-radius: 10px;
+}
+
+.box input {
+  background-color: inherit;
 }
 
 .titleHeading {
@@ -193,7 +198,7 @@ li {
   margin: 2%;
   width: 95%;
   height: 30px;
-  font-size: 80%;
+  font-size: 117%;
 }
 
 .textarea {
@@ -216,4 +221,5 @@ li {
   display: flex;
   justify-content: space-evenly;
   padding: 2%;
+  cursor: pointer;
 }

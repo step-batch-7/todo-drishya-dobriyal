@@ -33,7 +33,7 @@ const newItemTemplate = id => {
   div.setAttribute('id', id);
   div.innerHTML = `<input class='textarea' type="text" required></input>
       <div onclick="saveNewItem()"  id='${id}' title="save task"> + </div>
-      <div onclick="deleteItem()"  id='${id}' title="delete task"> - </div>`;
+      <div onclick="deleteItem()"  id='${id}' title="delete task"> x </div>`;
   return div;
 };
 
