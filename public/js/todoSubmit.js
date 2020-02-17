@@ -94,10 +94,17 @@ const changeItem = (itemId, titleId) => {
   sendNewRequest('POST', '/changeItem', postBody, callback);
 };
 
-// const highlightTitles = function() {
-//   // const todoIds = document.getElementsByClassName('details').map(todo => {
-//   // })
-// }
+const highlightTitles = function () {
+  const todoList = document.getElementById('todoList');
+  const previouslySelected = Array.from(todoList.querySelectorAll('.selectedTitle')).map(todo => todo.id)
+  previouslySelected.forEach(titleId => {
+    todoList.querySelector(`#${titleId}`).classList.remove('selectedTitle');
+  })
+  const todoIds = Array.from(document.getElementsByClassName('details')).map(todo => todo.id);
+  todoIds.forEach(titleId => {
+    todoList.querySelector(`#${titleId}`).classList.add('selectedTitle');
+  })
+}
 
 const displayMatch = search => {
   const content = event.target.value;
@@ -109,6 +116,7 @@ const displayMatch = search => {
       allTodo += createTodoTemplate(todo);
     });
     document.getElementById('content').innerHTML = allTodo;
+    highlightTitles();
   };
   sendNewRequest('POST', '/findGivenContent', postBody, callback);
 };
@@ -121,7 +129,7 @@ const displayTodo = (id) => {
     });
     const todoTemplate = createTodoTemplate(todo);
     document.getElementById('content').innerHTML = todoTemplate;
-    // highlightTitles();
+    highlightTitles();
   };
   sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
