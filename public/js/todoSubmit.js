@@ -1,28 +1,30 @@
-const logout = function () {
-  const callback = (response) => {
+const logout = function() {
+  const callback = response => {
     const { location } = JSON.parse(response);
     window.location.href = location;
-  }
-  sendNewRequest('GET', '/logout', undefined, callback)
-}
+  };
+  sendNewRequest('GET', '/logout', undefined, callback);
+};
 
 const toggleStatus = (titleId, itemId) => {
   const postBody = JSON.stringify({ titleId, itemId });
-  const callback = () => { };
+  const callback = () => {};
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
 
-const saveNewItem = (id) => {
+const saveNewItem = id => {
   const statusCode = document.querySelector('.newItem input').checked;
   const item = document.querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
   const callback = item => {
     const todoItem = JSON.parse(item);
     const li = createNewItemTemplate(todoItem, id);
-    document.querySelector(`.details`).appendChild(li);
+    document.querySelector('.details').appendChild(li);
     document.querySelector('.newItem').remove();
   };
-  if (item) sendNewRequest('POST', '/saveItem', postBody, callback);
+  if (item) {
+    sendNewRequest('POST', '/saveItem', postBody, callback);
+  }
 };
 
 const addNewItem = () => {
@@ -31,7 +33,7 @@ const addNewItem = () => {
   document.querySelector(`.details#${id}`).appendChild(div);
 };
 
-const deleteItem = (itemId) => {
+const deleteItem = itemId => {
   const titleId = event.target.parentNode.parentNode.id;
   const postBody = JSON.stringify({ titleId, itemId });
   const callback = (item, responseText) => {
@@ -55,7 +57,9 @@ const saveTitle = () => {
     document.getElementById('todoList').appendChild(li);
     document.getElementById('title').value = '';
   };
-  if (title) sendNewRequest('POST', '/saveTitle', postBody, callback);
+  if (title) {
+    sendNewRequest('POST', '/saveTitle', postBody, callback);
+  }
 };
 
 const displayTodoList = () => {
@@ -68,11 +72,10 @@ const displayTodoList = () => {
   sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
-const deleteTitle = (id) => {
-  const xhr = new XMLHttpRequest();
+const deleteTitle = id => {
   const postBody = JSON.stringify({ id });
   const callback = () => {
-    document.querySelector(`.box`).remove();
+    document.querySelector('.box').remove();
     document.querySelector(`#todoList #${id}`).remove();
   };
   sendNewRequest('POST', '/deleteTitle', postBody, callback);
@@ -90,23 +93,27 @@ const changeTitle = id => {
 const changeItem = (itemId, titleId) => {
   const newItem = event.target.value;
   const postBody = JSON.stringify({ titleId, itemId, newItem });
-  const callback = () => { };
+  const callback = () => {};
   sendNewRequest('POST', '/changeItem', postBody, callback);
 };
 
-const highlightTitles = function () {
+const highlightTitles = function() {
   const todoList = document.getElementById('todoList');
 
-  const previouslySelectedIds = Array.from(todoList.querySelectorAll('.selectedTitle')).map(todo => todo.id)
+  const previouslySelectedIds = Array.from(
+    todoList.querySelectorAll('.selectedTitle')
+  ).map(todo => todo.id);
   previouslySelectedIds.forEach(titleId => {
     todoList.querySelector(`#${titleId}`).classList.remove('selectedTitle');
-  })
+  });
 
-  const todoIds = Array.from(document.getElementsByClassName('details')).map(todo => todo.id);
+  const todoIds = Array.from(document.getElementsByClassName('details')).map(
+    todo => todo.id
+  );
   todoIds.forEach(titleId => {
     todoList.querySelector(`#${titleId}`).classList.add('selectedTitle');
-  })
-}
+  });
+};
 
 const displayMatch = search => {
   const content = event.target.value;
@@ -123,7 +130,7 @@ const displayMatch = search => {
   sendNewRequest('POST', '/findGivenContent', postBody, callback);
 };
 
-const displayTodo = (id) => {
+const displayTodo = id => {
   const callback = allTodo => {
     const userData = JSON.parse(allTodo);
     const todo = userData.find(data => {
@@ -136,16 +143,17 @@ const displayTodo = (id) => {
   sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
-const sendNewRequest = function (method, url, data, callback) {
+const sendNewRequest = function(method, url, data, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {
+    // eslint-disable-next-line no-magic-numbers
     if (xhr.status === 200) {
       callback(xhr.responseText);
     }
   };
   xhr.open(method, url);
-  xhr.setRequestHeader('Content-type', 'application/json')
-  xhr.setRequestHeader('Set-Cookie', document.cookie)
+  xhr.setRequestHeader('Content-type', 'application/json');
+  xhr.setRequestHeader('Set-Cookie', document.cookie);
   xhr.send(data);
 };
 
