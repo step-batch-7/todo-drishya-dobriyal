@@ -1,6 +1,6 @@
 const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   statusCode ? (statusCode = 'checked') : (statusCode = '');
-  return `<input class="checkBox" type="checkBox"  onclick="toggleStatus()" ${statusCode} title="toggle status"></input>
+  return `<input class="checkBox" type="checkBox"  onclick="toggleStatus('${titleId}','${id}')" ${statusCode} title="toggle status"></input>
             <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
           <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteItem('${id}')" title="delete item"></i>`;
 };
@@ -10,10 +10,10 @@ const createTodoTemplate = todo => {
   let todoTemplate = `<div class='box'>
       <div class='titleHeading'>
       <input value='${title}' type='text' onchange="changeTitle('${id}')"></input>
-      <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" id='${id}' onclick='deleteTitle()' title="delete Title"></i></span>
+      <span id='${id}'><i class="fa fa-trash-o" aria-hidden="true" onclick="deleteTitle('${id}')" title="delete Title"></i></span>
       </div>
       <div id='${id}' class='details'>`;
-  todo.tasks.forEach(task => {
+  tasks.forEach(task => {
     todoTemplate += `<li id='${task.id}'>${createItemTemplate(task, id)}</li>`;
   });
   todoTemplate += `</div><div  class="addNewItem"><button onclick = "addNewItem()" id='${id}'> Add New Item</button></div></div>`;
@@ -49,7 +49,7 @@ const todoListTemplate = userData => {
   let html = "<h3> &nbsp  &nbsp TODO LIST's</h3>";
 
   userData.forEach(data => {
-    html += `<div class = 'titles'>
+    html += `<div class = 'titles' id='${data.id}'>
              <div onclick="displayTodo('${data.id}')" >${data.title}</div>
           </div>`;
   });

@@ -6,9 +6,9 @@ const logout = function () {
   sendNewRequest('GET', '/logout', undefined, callback)
 }
 
-const toggleStatus = () => {
-  const titleId = event.target.parentNode.parentNode.id;
-  const itemId = event.target.parentNode.id;
+const toggleStatus = (titleId, itemId) => {
+  // const titleId = event.target.parentNode.parentNode.id;
+  // const itemId = event.target.parentNode.id;
   const postBody = JSON.stringify({ titleId, itemId });
   const callback = () => { };
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
@@ -61,7 +61,6 @@ const saveTitle = () => {
   if (title) sendNewRequest('POST', '/saveTitle', postBody, callback);
 };
 
-
 const displayTodoList = () => {
   const callback = list => {
     const content = JSON.parse(list);
@@ -72,9 +71,9 @@ const displayTodoList = () => {
   sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
-const deleteTitle = () => {
+const deleteTitle = (id) => {
   const xhr = new XMLHttpRequest();
-  const id = event.target.id;
+  // const id = event.target.id;
   const postBody = JSON.stringify({ id });
   const callback = () => {
     document.querySelector(`.box`).remove();
