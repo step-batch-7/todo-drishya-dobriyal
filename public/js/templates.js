@@ -2,7 +2,7 @@ const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   statusCode ? (statusCode = 'checked') : (statusCode = '');
   return `<input class="checkBox" type="checkBox"  onclick="toggleStatus()" ${statusCode} title="toggle status"></input>
             <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
-          <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteItem()" id='${id}' title="delete item"></i>`;
+          <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteItem('${id}')" title="delete item"></i>`;
 };
 
 const createTodoTemplate = todo => {
@@ -32,16 +32,16 @@ const newItemTemplate = id => {
   div.classList.add('newItem');
   div.setAttribute('id', id);
   div.innerHTML = `<input class='textarea' type="text" required></input>
-      <div onclick="saveNewItem()"  id='${id}' title="save task"> + </div>
-      <div onclick="deleteItem()"  id='${id}' title="delete task"> x </div>`;
+      <div onclick="saveNewItem('${id}')" title="save task"> + </div>
+      <div onclick="deleteItem('${id}')" title="delete task"> x </div>`;
   return div;
 };
 
 const displayNewTitle = (id, title) => {
   const div = document.createElement('div');
-  div.setAttribute('id', id);
+  // div.setAttribute('id', id);
   div.setAttribute('class', 'titles');
-  div.innerHTML = `<div onclick="displayTodo()" id='${id}'>${title}</div>`;
+  div.innerHTML = `<div onclick="displayTodo('${id}')">${title}</div>`;
   return div;
 };
 
@@ -49,8 +49,8 @@ const todoListTemplate = userData => {
   let html = "<h3> &nbsp  &nbsp TODO LIST's</h3>";
 
   userData.forEach(data => {
-    html += `<div class = 'titles' id='${data.id}'>
-             <div onclick="displayTodo()"  id='${data.id}' >${data.title}</div>
+    html += `<div class = 'titles'>
+             <div onclick="displayTodo('${data.id}')" >${data.title}</div>
           </div>`;
   });
   return html;

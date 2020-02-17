@@ -14,8 +14,8 @@ const toggleStatus = () => {
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
 
-const saveNewItem = () => {
-  const id = event.target.parentNode.id;
+const saveNewItem = (id) => {
+  // const id = event.target.parentNode.id;
   const statusCode = document.querySelector('.newItem input').checked;
   const item = document.querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
@@ -34,9 +34,8 @@ const addNewItem = () => {
   document.querySelector(`.details#${id}`).appendChild(div);
 };
 
-const deleteItem = () => {
+const deleteItem = (itemId) => {
   const titleId = event.target.parentNode.parentNode.id;
-  const itemId = event.target.id;
   const postBody = JSON.stringify({ titleId, itemId });
   const callback = (item, responseText) => {
     item.remove();
@@ -62,18 +61,6 @@ const saveTitle = () => {
   if (title) sendNewRequest('POST', '/saveTitle', postBody, callback);
 };
 
-const displayTodo = () => {
-  const id = event.target.id;
-  const callback = allTodo => {
-    const userData = JSON.parse(allTodo);
-    const todo = userData.find(data => {
-      return data.id === id;
-    });
-    const todoTemplate = createTodoTemplate(todo);
-    document.getElementById('content').innerHTML = todoTemplate;
-  };
-  sendNewRequest('GET', '/todoStore.json', undefined, callback);
-};
 
 const displayTodoList = () => {
   const callback = list => {
@@ -112,6 +99,11 @@ const changeItem = (itemId, titleId) => {
   sendNewRequest('POST', '/changeItem', postBody, callback);
 };
 
+// const highlightTitles = function() {
+//   // const todoIds = document.getElementsByClassName('details').map(todo => {
+//   // })
+// }
+
 const displayMatch = search => {
   const content = event.target.value;
   const postBody = JSON.stringify({ content, search });
@@ -124,6 +116,20 @@ const displayMatch = search => {
     document.getElementById('content').innerHTML = allTodo;
   };
   sendNewRequest('POST', '/findGivenContent', postBody, callback);
+};
+
+const displayTodo = (id) => {
+  // const id = event.target.id;
+  const callback = allTodo => {
+    const userData = JSON.parse(allTodo);
+    const todo = userData.find(data => {
+      return data.id === id;
+    });
+    const todoTemplate = createTodoTemplate(todo);
+    document.getElementById('content').innerHTML = todoTemplate;
+    // highlightTitles();
+  };
+  sendNewRequest('GET', '/todoStore.json', undefined, callback);
 };
 
 const sendNewRequest = function (method, url, data, callback) {
