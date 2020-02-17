@@ -1,3 +1,4 @@
+/****done    
 find an appropriate  data structure for todo
 create home page that will display the data
 using Xml to give data
@@ -21,10 +22,21 @@ add new user in todoStore ,// every handler should know the user Name to access
 change data structure of todoStore in order to add user to them 
 
 
-logout mechanism
+logout mechanism    ****/
+
 
 ---done every time accessing to the localhost is redirecting to login 
-index.html > logo is not visible
+---done index.html > logo is not visible
 use app.locals to store the user data and todoData
 ---done should inform user if user is already exists while typing 
-should inform user if password is incorrect
+---done should inform user if password is incorrect
+---done Add login option in signUp page
+add alert icons is invalid password and user exists error statements
+
+
+modify front end  
+    increase size of icon of delete icon
+    addItem + and - option to be icons
+    decrease heading => heading taking more space( todo )
+    should not allow empty title and item
+    todoList should be highlighted for all todo which are on content

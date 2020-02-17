@@ -26,10 +26,10 @@ body {
 }
 
 #logout {
-  content: url('/images/logout.png');
-  margin: 20px;
-  width: 52px;
-  height: 56px;
+  content: url(/images/logout.png);
+   margin: 33px 32px;
+  width: 40px;
+  height: 40px;
 }
 
 #container {

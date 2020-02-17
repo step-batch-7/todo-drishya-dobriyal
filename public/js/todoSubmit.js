@@ -25,7 +25,7 @@ const saveNewItem = () => {
     document.querySelector(`.details`).appendChild(li);
     document.querySelector('.newItem').remove();
   };
-  sendNewRequest('POST', '/saveItem', postBody, callback);
+  if (item) sendNewRequest('POST', '/saveItem', postBody, callback);
 };
 
 const addNewItem = () => {
@@ -59,7 +59,7 @@ const saveTitle = () => {
     document.getElementById('todoList').appendChild(li);
     document.getElementById('title').value = '';
   };
-  sendNewRequest('POST', '/saveTitle', postBody, callback);
+  if (title) sendNewRequest('POST', '/saveTitle', postBody, callback);
 };
 
 const displayTodo = () => {
