@@ -96,10 +96,12 @@ const changeItem = (itemId, titleId) => {
 
 const highlightTitles = function () {
   const todoList = document.getElementById('todoList');
-  const previouslySelected = Array.from(todoList.querySelectorAll('.selectedTitle')).map(todo => todo.id)
-  previouslySelected.forEach(titleId => {
+
+  const previouslySelectedIds = Array.from(todoList.querySelectorAll('.selectedTitle')).map(todo => todo.id)
+  previouslySelectedIds.forEach(titleId => {
     todoList.querySelector(`#${titleId}`).classList.remove('selectedTitle');
   })
+
   const todoIds = Array.from(document.getElementsByClassName('details')).map(todo => todo.id);
   todoIds.forEach(titleId => {
     todoList.querySelector(`#${titleId}`).classList.add('selectedTitle');

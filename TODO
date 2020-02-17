@@ -38,5 +38,5 @@ modify front end
 ---done    addItem + and - option to be icons
 ---done    decrease heading => heading taking more space( todo )
 ---done    should not allow empty title and item
-    todoList should be highlighted for all todo which are on content
+---done    todoList should be highlighted for all todo which are on content
     compatable with all system

@@ -169,7 +169,7 @@ li {
   border-style: ridge;
   padding-left: 10px;
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   padding: 1%;
   list-style-type: none;
 }
@@ -206,10 +206,14 @@ li {
 }
 
 .textarea {
-  height: 15px;
-  width: 282%;
-  padding: 1%;
-  margin-top: 1.2%;
+ height: 15px;
+    width: 282%;
+    padding: 2% 2%;
+    margin-top: 1.2%;
+    font-size: 130%;
+    border: 1px solid rgba(219, 195, 195, 0.4);
+    border-radius: 5px;
+    
 }
 
 .newItem {
@@ -218,6 +222,7 @@ li {
   border-radius: 8px;
   padding: -1px;
   padding: 3px 8px 4px;
+  margin-top: 10px;
 }
 
 .newItem > div {
@@ -226,4 +231,5 @@ li {
   justify-content: space-evenly;
   padding: 2%;
   cursor: pointer;
+  font-size: 136%;
 }
