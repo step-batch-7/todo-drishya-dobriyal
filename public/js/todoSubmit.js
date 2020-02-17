@@ -31,6 +31,7 @@ const addNewItem = () => {
   const id = event.target.id;
   const div = newItemTemplate(id);
   document.querySelector(`.details#${id}`).appendChild(div);
+  div.firstChild.focus();
 };
 
 const deleteItem = itemId => {
