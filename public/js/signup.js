@@ -18,6 +18,20 @@ const checkUsername = function(event) {
   sendNewRequest('POST', '/checkUserNameAvailability', data, callback);
 };
 
+const requestSignUp = function() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const confirmedPassword = document.getElementById('confirmPassword').value;
+  const callback = data => {
+    const { location } = JSON.parse(data);
+    window.location.href = location;
+  };
+  if (password === confirmedPassword) {
+    const data = JSON.stringify({ username, password });
+    sendNewRequest('POST', '/signUp', data, callback);
+  }
+};
+
 const sendNewRequest = function(method, url, data, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = () => {

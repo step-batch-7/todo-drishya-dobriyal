@@ -27,11 +27,11 @@ logout mechanism    ****/
 
 ---done every time accessing to the localhost is redirecting to login 
 ---done index.html > logo is not visible
-use app.locals to store the user data and todoData
+---done use app.locals to store the user data and todoData
 ---done should inform user if user is already exists while typing 
 ---done should inform user if password is incorrect
 ---done Add login option in signUp page
-add alert icons is invalid password and user exists error statements
+---done add alert icons is invalid password and user exists error statements
 
 
 modify front end  

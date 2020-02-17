@@ -12,7 +12,6 @@
     <h1>TODO</h1>
   </div>
   <div class="signUpPage">
-    <form action="/signUp" method="POST">
       <div class="block">
         <h2 class="header">Sign Up</h2>
         <div class="userInputs">
@@ -22,13 +21,13 @@
           <div id="existingStatus" style="text-align: center;"></div>
 
           <input type="password" name="password" id="password" placeholder="Password" required></input>
+          <input type="password" name="password" id="confirmPassword" placeholder="Confirm Password" required></input>
         </div>
         <div class="buttonBlock">
           <a class="loginLink" href="/user/login.html">LogIn Here</a>
-          <button class="button" type="submit" id='signup'>SignUP</button>
+          <button class="button" onclick="requestSignUp()" id='signup'>SignUP</button>
         </div>
       </div>
-    </form>
   </div>
 </body>
 

@@ -1,51 +1,51 @@
 const fs = require('fs');
 const request = require('supertest');
 const sinon = require('sinon');
-const { sessions } = require('../lib/sessionManager')
+const { sessions } = require('../lib/sessionManager');
 
 const { app } = require('../lib/assignHandlers');
 
-describe('GET method', function () {
+describe('GET method', function() {
   let sessionId;
   beforeEach(() => {
-    sessionId = sessions.createSession('user')
+    sessionId = sessions.createSession('user');
   });
-  it('for home page for / url', function (done) {
+  it('for home page for / url', function(done) {
     request(app)
       .get('/')
       .set('cookie', `session_Id = ${sessionId}`)
       .set('Accept', '*/*')
       .expect(200, done);
   });
-  it('for any other url with given content type', function (done) {
+  it('for any other url with given content type', function(done) {
     request(app)
       .get('/css/style.css')
       .set('cookie', `session_Id = ${sessionId}`)
       .set('Accept', '*/*')
       .expect(200, done);
   });
-  it('for any other url with given content type', function (done) {
+  it('for any other url with given content type', function(done) {
     request(app)
       .get('/js/todoSubmit.js')
       .set('cookie', `session_Id = ${sessionId}`)
       .set('Accept', '*/*')
       .expect(200, done);
   });
-  it('for /todoData', function (done) {
+  it('for /todoData', function(done) {
     request(app)
       .get('/todoStore.json')
       .set('cookie', `session_Id = ${sessionId}`)
       .set('Accept', '*/*')
       .expect(200, done);
   });
-  it('for /logout', function (done) {
+  it('for /logout', function(done) {
     request(app)
       .get('/logout')
       .set('cookie', `session_Id = ${sessionId}`)
       .expect(200, done)
-      .expect(/login.html/)
+      .expect(/login.html/);
   });
-  it('for /badFile', function (done) {
+  it('for /badFile', function(done) {
     request(app)
       .get('/badFile.html')
       .set('Accept', '*/*')
@@ -53,18 +53,18 @@ describe('GET method', function () {
   });
 });
 
-describe('POST saveData', function () {
+describe('POST saveData', function() {
   let sessionId;
   beforeEach(() => {
     const fake = sinon.fake();
     sinon.replace(fs, 'writeFile', fake);
-    sessionId = sessions.createSession('user')
+    sessionId = sessions.createSession('user');
   });
   afterEach(() => {
     sinon.restore();
   });
-  describe('save title', function () {
-    it('should save title on /saveTitle Req', function (done) {
+  describe('save title', function() {
+    it('should save title on /saveTitle Req', function(done) {
       request(app)
         .post('/saveTitle')
         .set('Content-type', 'application/json')
@@ -74,14 +74,14 @@ describe('POST saveData', function () {
         .expect('Content-Type', 'application/json');
     });
 
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/saveTitle')
         .send('{"title":"Bat"}')
         .expect(303, done);
     });
 
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -89,8 +89,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('save item', function () {
-    it('should save item on /saveItem Req', function (done) {
+  describe('save item', function() {
+    it('should save item on /saveItem Req', function(done) {
       request(app)
         .post('/saveItem')
         .set('Content-type', 'application/json')
@@ -102,7 +102,7 @@ describe('POST saveData', function () {
         .expect('Content-Type', 'application/json');
     });
 
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/saveItem')
         .send(
@@ -111,7 +111,7 @@ describe('POST saveData', function () {
         .expect(303, done);
     });
 
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -119,8 +119,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('delete item', function () {
-    it('should delete item on /deleteItem Req', function (done) {
+  describe('delete item', function() {
+    it('should delete item on /deleteItem Req', function(done) {
       request(app)
         .post('/deleteItem')
         .set('cookie', `session_Id=${sessionId}`)
@@ -129,13 +129,13 @@ describe('POST saveData', function () {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/deleteItem')
         .send('{ "itemI": "I_2", "titleId":"T_1" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -143,8 +143,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('delete title', function () {
-    it('should delete title on /deleteTitle Req', function (done) {
+  describe('delete title', function() {
+    it('should delete title on /deleteTitle Req', function(done) {
       request(app)
         .post('/deleteTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -153,14 +153,14 @@ describe('POST saveData', function () {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/deleteTitle')
         .set('Content-type', 'application/json')
         .send('{ "id": "T_1" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -168,8 +168,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('toggle status', function () {
-    it('should toggle status on /toggleStatus Req', function (done) {
+  describe('toggle status', function() {
+    it('should toggle status on /toggleStatus Req', function(done) {
       request(app)
         .post('/toggleStatus')
         .set('cookie', `session_Id=${sessionId}`)
@@ -178,14 +178,14 @@ describe('POST saveData', function () {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/toggleStatus')
         .set('Content-type', 'application/json')
         .send('{ "itemId": "I_3", "titleId":"T_2"}')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -193,8 +193,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('change item', function () {
-    it('should change item on /changeItem req ', function (done) {
+  describe('change item', function() {
+    it('should change item on /changeItem req ', function(done) {
       request(app)
         .post('/changeItem')
         .set('cookie', `session_Id=${sessionId}`)
@@ -203,14 +203,14 @@ describe('POST saveData', function () {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/changeItem')
         .set('Content-type', 'application/json')
         .send('{ "newItem": "subject", "titleId":"T_2", "itemId":"I_3" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -218,8 +218,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('change title', function () {
-    it('should change title on /changeTitle req ', function (done) {
+  describe('change title', function() {
+    it('should change title on /changeTitle req ', function(done) {
       request(app)
         .post('/changeTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -228,14 +228,14 @@ describe('POST saveData', function () {
         .expect(200, done)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/changeTitle')
         .set('Content-type', 'application/json')
         .send('{ "newTitle": "subject", "id":"T_2" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -243,8 +243,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('search title', function () {
-    it('should search title on /findGivenContent req ', function (done) {
+  describe('search title', function() {
+    it('should search title on /findGivenContent req ', function(done) {
       request(app)
         .post('/findGivenContent')
         .set('cookie', `session_Id=${sessionId}`)
@@ -254,14 +254,14 @@ describe('POST saveData', function () {
         .expect(/components/)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/findGivenContent')
         .set('Content-type', 'application/json')
         .send('{ "content": "components", "search":"title" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -269,8 +269,8 @@ describe('POST saveData', function () {
         .expect(400, done);
     });
   });
-  describe('search task', function () {
-    it('should search task on /findGivenContent req ', function (done) {
+  describe('search task', function() {
+    it('should search task on /findGivenContent req ', function(done) {
       request(app)
         .post('/findGivenContent')
         .set('cookie', `session_Id=${sessionId}`)
@@ -280,14 +280,14 @@ describe('POST saveData', function () {
         .expect(/component1/)
         .expect('Content-Type', 'application/json');
     });
-    it('should redirect to login if cookie is not set', function (done) {
+    it('should redirect to login if cookie is not set', function(done) {
       request(app)
         .post('/findGivenContent')
         .set('Content-type', 'application/json')
         .send('{ "content": "component1", "search":"item" }')
         .expect(303, done);
     });
-    it('should give bad request if given data is incorrect', function (done) {
+    it('should give bad request if given data is incorrect', function(done) {
       request(app)
         .post('/saveTitle')
         .set('cookie', `session_Id=${sessionId}`)
@@ -297,8 +297,8 @@ describe('POST saveData', function () {
   });
 });
 
-describe('method not Handled', function () {
-  it('should give method not allowed for unhandled method', function (done) {
+describe('method not Handled', function() {
+  it('should give method not allowed for unhandled method', function(done) {
     request(app)
       .put('/saveTitle')
       .set('Accept', '*/*')
@@ -307,116 +307,116 @@ describe('method not Handled', function () {
   });
 });
 
-describe("signUp", function () {
+describe('signUp', function() {
   beforeEach(() => {
     const fake = sinon.fake();
     sinon.replace(fs, 'writeFile', fake);
-    sessions.createSession('user_123', 'user')
+    sessions.createSession('user_123', 'user');
   });
   afterEach(() => {
     sinon.restore();
   });
 
-  it("should register new user", function (done) {
+  it('should register new user', function(done) {
     request(app)
       .post('/signUp')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('username=drishya&password=drishya')
+      .set('Content-type', 'application/json')
+      .send('{"username":"drishya","password":"drishya"}')
       .expect(303, done)
-      .expect('location', '/user/login.html')
-  })
+      .expect(/user\/login.html/);
+  });
 
-  it(" should give bad request if given data is incorrect", function (done) {
+  it(' should give bad request if given data is incorrect', function(done) {
     request(app)
       .post('/signUp')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('usernae=drishya&password=drishya')
-      .expect(400, done)
-  })
+      .set('Content-type', 'application/json')
+      .send('{"usernam":"drishya","password":"drishya"}')
+      .expect(400, done);
+  });
 
-  it("should redirect to login if username already exists", function (done) {
+  it('should redirect to login if username already exists', function(done) {
     request(app)
       .post('/signUp')
-      .set('Content-type', 'application/x-www-form-urlencoded')
-      .send('username=user&password=user')
+      .set('Content-type', 'application/json')
+      .send('{"username":"user","password":"user"}')
       .expect(303, done)
-      .expect('location', '/user/login.html')
-  })
+      .expect(/user\/login.html/);
+  });
 
-  describe("checkUserNameAvailability", function () {
-    it("should give true if username exists", function (done) {
+  describe('checkUserNameAvailability', function() {
+    it('should give true if username exists', function(done) {
       request(app)
         .post('/checkUserNameAvailability')
         .set('Content-type', 'application/json')
         .send('{"username":"user"}')
         .expect(200, done)
-        .expect(/true/)
-    })
-    it("should give false if username do  not exists", function (done) {
+        .expect(/true/);
+    });
+    it('should give false if username do  not exists', function(done) {
       request(app)
         .post('/checkUserNameAvailability')
         .set('Content-type', 'application/json')
         .send('{"username":"us"}')
         .expect(200, done)
-        .expect(/false/)
-    })
+        .expect(/false/);
+    });
   });
 });
 
-describe("Login", function () {
-  it("should give invalid password for incorrect password", function (done) {
+describe('Login', function() {
+  it('should give invalid password for incorrect password', function(done) {
     request(app)
       .post('/login')
       .set('Content-type', 'application/json')
       .send('{"username":"user","password":"incorrectPassword"}')
       .expect(401, done)
-      .expect(/Invalid/)
-  })
+      .expect(/Invalid/);
+  });
 
-  it("should redirect to signUp page if user is not present", function (done) {
+  it('should redirect to signUp page if user is not present', function(done) {
     request(app)
       .post('/login')
       .set('Content-type', 'application/json')
       .send('{"username":"unauthorizedUser","password":"password"}')
       .expect(303, done)
-      .expect(/user\/signup.html/)
-  })
+      .expect(/user\/signup.html/);
+  });
 
-  it("should give me cookie back if user and password are valid", function (done) {
+  it('should give me cookie back if user and password are valid', function(done) {
     request(app)
       .post('/login')
       .set('Content-type', 'application/json')
       .send('{ "username": "user", "password": "user" }')
       .expect(303, done)
       .expect(/index.html/)
-      .expect('Set-Cookie', /session_Id=[0-9]+/)
-  })
+      .expect('Set-Cookie', /session_Id=[0-9]+/);
+  });
 
-  it("should give bad request if data is not valid", function (done) {
+  it('should give bad request if data is not valid', function(done) {
     request(app)
       .post('/login')
       .set('Content-type', 'application/json')
       .send('{ "user": "user", "password": "user" }')
-      .expect(400, done)
-  })
+      .expect(400, done);
+  });
 });
 
-describe("ensureLoggedIn", function () {
+describe('ensureLoggedIn', function() {
   let sessionId;
   beforeEach(() => {
-    sessionId = sessions.createSession('user')
+    sessionId = sessions.createSession('user');
   });
-  it("should give 200 OK if cookie is created for given username", function (done) {
+  it('should give 200 OK if cookie is created for given username', function(done) {
     request(app)
       .get('/index.html')
       .set('cookie', `session_Id = ${sessionId}`)
-      .expect(200, done)
-  })
+      .expect(200, done);
+  });
 
-  it("should redirect /user/login.html if cookie is not created for given username", function (done) {
+  it('should redirect /user/login.html if cookie is not created for given username', function(done) {
     request(app)
       .get('/index.html')
       .expect(303, done)
-      .expect('location', '/user/login.html')
-  })
+      .expect('location', '/user/login.html');
+  });
 });
