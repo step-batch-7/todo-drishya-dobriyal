@@ -7,15 +7,12 @@ const logout = function () {
 }
 
 const toggleStatus = (titleId, itemId) => {
-  // const titleId = event.target.parentNode.parentNode.id;
-  // const itemId = event.target.parentNode.id;
   const postBody = JSON.stringify({ titleId, itemId });
   const callback = () => { };
   sendNewRequest('POST', '/toggleStatus', postBody, callback);
 };
 
 const saveNewItem = (id) => {
-  // const id = event.target.parentNode.id;
   const statusCode = document.querySelector('.newItem input').checked;
   const item = document.querySelector('.newItem .textarea').value;
   const postBody = JSON.stringify({ task: { item, statusCode }, id });
@@ -73,7 +70,6 @@ const displayTodoList = () => {
 
 const deleteTitle = (id) => {
   const xhr = new XMLHttpRequest();
-  // const id = event.target.id;
   const postBody = JSON.stringify({ id });
   const callback = () => {
     document.querySelector(`.box`).remove();
@@ -118,7 +114,6 @@ const displayMatch = search => {
 };
 
 const displayTodo = (id) => {
-  // const id = event.target.id;
   const callback = allTodo => {
     const userData = JSON.parse(allTodo);
     const todo = userData.find(data => {

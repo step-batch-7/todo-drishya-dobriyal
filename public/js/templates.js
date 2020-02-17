@@ -39,7 +39,7 @@ const newItemTemplate = id => {
 
 const displayNewTitle = (id, title) => {
   const div = document.createElement('div');
-  // div.setAttribute('id', id);
+  div.setAttribute('id', id);
   div.setAttribute('class', 'titles');
   div.innerHTML = `<div onclick="displayTodo('${id}')">${title}</div>`;
   return div;
