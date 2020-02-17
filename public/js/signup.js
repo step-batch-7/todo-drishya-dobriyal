@@ -26,10 +26,12 @@ const requestSignUp = function() {
     const { location } = JSON.parse(data);
     window.location.href = location;
   };
-  if (password === confirmedPassword) {
-    const data = JSON.stringify({ username, password });
-    sendNewRequest('POST', '/signUp', data, callback);
+  if (!password || password !== confirmedPassword) {
+    document.getElementById('existingStatus').innerText = 'Invalid Password ';
+    return;
   }
+  const data = JSON.stringify({ username, password });
+  username && sendNewRequest('POST', '/signUp', data, callback);
 };
 
 const sendNewRequest = function(method, url, data, callback) {

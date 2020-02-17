@@ -18,15 +18,15 @@
 
           <input type="text" name="username" id="username" placeholder="Username" oninput="checkUsername(event)"
             required></input>
+            
+            <input type="password" name="password" id="password" placeholder="Password" required></input>
+            <input type="password" name="password" id="confirmPassword" placeholder="Confirm Password" required></input>
+          </div>
+          <div class="buttonBlock">
+            <a class="loginLink" href="/user/login.html">LogIn Here</a>
+            <button class="button" onclick="requestSignUp()" id='signup'>SignUP</button>
+          </div>
           <div id="existingStatus" style="text-align: center;"></div>
-
-          <input type="password" name="password" id="password" placeholder="Password" required></input>
-          <input type="password" name="password" id="confirmPassword" placeholder="Confirm Password" required></input>
-        </div>
-        <div class="buttonBlock">
-          <a class="loginLink" href="/user/login.html">LogIn Here</a>
-          <button class="button" onclick="requestSignUp()" id='signup'>SignUP</button>
-        </div>
       </div>
   </div>
 </body>

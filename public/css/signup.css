@@ -15,6 +15,7 @@ body {
 
 #existingStatus {
   color: red;
+  margin-top: 18px;
 }
 
 .signUpPage {
@@ -22,7 +23,6 @@ body {
   width: 100%;
   margin: 0 auto;
 }
-
 
 .loginLink {
   margin: 30px 24px 14px;
@@ -64,9 +64,9 @@ input {
 }
 
 button {
-      margin: 0px auto;
-    margin-top: 25px;
-    height: 60%;
-    font-size: 15px;
-    width: 37%;
+  margin: 0px auto;
+  margin-top: 25px;
+  height: 60%;
+  font-size: 15px;
+  width: 37%;
 }
