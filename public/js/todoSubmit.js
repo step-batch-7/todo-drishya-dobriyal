@@ -19,7 +19,7 @@ const saveNewItem = id => {
   const callback = item => {
     const todoItem = JSON.parse(item);
     const li = createNewItemTemplate(todoItem, id);
-    document.querySelector('.details').appendChild(li);
+    document.querySelector(`.details#${id}`).appendChild(li);
     document.querySelector('.newItem').remove();
   };
   if (item) {

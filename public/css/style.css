@@ -110,7 +110,7 @@ h4 {
 }
 
 .selectedTitle {
-  background-color: bisque;
+  background-color: rgba(172, 169, 169, 0.1);
   box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.3);
   font-size: 130%;
 }
@@ -122,23 +122,20 @@ h4 {
   box-shadow: -1px -1px 3px 3px rgba(0, 0, 0, 0.15);
   width: 50%;
   display: flex;
+  flex-flow: column;
   justify-content: end;
   overflow: scroll;
   padding: 1% 3% 1%;
   border-radius: 10px;
 }
 
-.details {
-  overflow: scroll;
-  height: 75%;
-}
-
 .box {
-  margin: 10px 10px;
+  margin: 17px 77px;
   border: 1px solid;
-  padding: inherit;
+  padding: 0% 5% 2%;
   width: 527px;
   border-radius: 10px;
+  height: fit-content;
 }
 
 .box input {
@@ -202,8 +199,8 @@ li {
 }
 
 .addNewItem > button {
-  margin: 2%;
-  width: 95%;
+  margin: 2% 3%;
+  width: 97%;
   height: 30px;
   font-size: 117%;
 }
