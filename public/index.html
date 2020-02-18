@@ -29,8 +29,8 @@
       </div>
       <div class="blocks">
         <h4>Search Engine</h4>
-        <div id="search"><input type="text" placeholder="search title" onkeyup="displayMatch('title')"></input>
-          <input type="text" placeholder="search task" onkeyup="displayMatch('task')"></input>
+        <div id="search"><input type="text" placeholder="search title" onblur="resetInput()" onkeyup="displayMatch('title')"></input>
+          <input type="text" placeholder="search task" onblur="resetInput()" onkeyup="displayMatch('task')"></input>
         </div>
       </div>
     </div>

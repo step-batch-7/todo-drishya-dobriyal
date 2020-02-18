@@ -27,6 +27,10 @@ const saveNewItem = id => {
   }
 };
 
+const resetInput = function() {
+  event.target.value = '';
+};
+
 const addNewItem = () => {
   const id = event.target.id;
   const div = newItemTemplate(id);
