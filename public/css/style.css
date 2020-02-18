@@ -130,7 +130,7 @@ h4 {
 }
 
 .box {
-  margin: 17px 77px;
+  margin: 15px auto;
   border: 1px solid;
   padding: 0% 5% 2%;
   width: 527px;
@@ -163,8 +163,9 @@ h4 {
 }
 
 .checkbox {
-  margin: 15px 5px 15px;
+  margin: 8px 5px 8px;
 }
+
 li {
   border-style: ridge;
   padding-left: 10px;

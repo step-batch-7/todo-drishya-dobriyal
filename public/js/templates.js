@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 const createItemTemplate = ({ id, statusCode, item }, titleId) => {
   let isDone;
-  statusCode ? isDone = 'checked' : isDone = '';
-  return `<input class="checkBox" type="checkBox"  onclick="toggleStatus('${titleId}','${id}')" ${isDone} title="toggle status"></input>
+  statusCode ? (isDone = 'checked') : (isDone = '');
+  return `<input class="checkbox" type="checkBox"  onclick="toggleStatus('${titleId}','${id}')" ${isDone} title="toggle status"></input>
             <input value='${item}' type='text' onchange="changeItem('${id}','${titleId}')"  class="inputTask"></input>
           <i class="fa fa-trash-o" aria-hidden="true" onclick="deleteItem('${id}')" title="delete item"></i>`;
 };
@@ -48,7 +48,7 @@ const displayNewTitle = (id, title) => {
 };
 
 const todoListTemplate = userData => {
-  let html = '<h3> &nbsp  &nbsp TODO LIST\'s</h3>';
+  let html = "<h3> &nbsp  &nbsp TODO LIST's</h3>";
 
   userData.forEach(data => {
     html += `<div class = 'titles' id='${data.id}'>
