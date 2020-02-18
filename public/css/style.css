@@ -35,7 +35,7 @@ body {
 #container {
   display: flex;
   justify-content: space-around;
-  height: 635px;
+  height: 87vh;
   width: 100%;
 }
 
